@@ -1,0 +1,45 @@
+---
+permalink: concepts/key-points-about-assign-and-modify-permissions.html 
+sidebar: sidebar 
+keywords:  
+summary: Bei der Arbeit mit vCenter Server-Berechtigungen gibt es einige wichtige Punkte, die Sie beachten sollten. Ob eine ONTAP-Tools für VMware vSphere-Aufgabe erfolgreich ist, hängt davon ab, wo Sie eine Berechtigung zugewiesen haben oder welche Aktionen ein Benutzer nach der Änderung einer Berechtigung ergriffen hat. 
+---
+= Zuweisen und Ändern von Berechtigungen für vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Arbeit mit vCenter Server-Berechtigungen gibt es einige wichtige Punkte, die Sie beachten sollten. Ob eine ONTAP-Tools für VMware vSphere-Aufgabe erfolgreich ist, hängt davon ab, wo Sie eine Berechtigung zugewiesen haben oder welche Aktionen ein Benutzer nach der Änderung einer Berechtigung ergriffen hat.
+
+
+
+== Berechtigungen werden zugewiesen
+
+Sie müssen nur vCenter Server-Berechtigungen einrichten, wenn Sie den Zugriff auf vSphere-Objekte und -Aufgaben einschränken möchten. Andernfalls können Sie sich als Administrator anmelden. Mit dieser Anmeldung können Sie automatisch auf alle vSphere Objekte zugreifen.
+
+Bei der Zuweisung von Berechtigungen werden ONTAP-Tools für VMware vSphere-Aufgaben bestimmt, die ein Benutzer ausführen kann.
+
+Um die Fertigstellung einer Aufgabe zu gewährleisten, sollten Sie manchmal Berechtigungen auf einer höheren Ebene zuweisen, z. B. das Stammobjekt. Dies ist der Fall, wenn eine Aufgabe eine Berechtigung erfordert, die nicht auf ein bestimmtes vSphere-Objekt angewendet wird (z. B. Tracking the Task), oder wenn eine erforderliche Berechtigung auf ein nicht-vSphere-Objekt (z. B. ein Storage-System) angewendet wird.
+
+In diesen Fällen können Sie eine Berechtigung so einrichten, dass sie von den untergeordneten Entitäten übernommen wird. Sie können den untergeordneten Entitäten auch andere Berechtigungen zuweisen. Die einer untergeordneten Entität zugewiesene Berechtigung überschreibt immer die Berechtigung, die von der übergeordneten Einheit übernommen wurde. Dies bedeutet, dass Sie einer untergeordneten Entität Berechtigungen erteilen können, um den Umfang einer Berechtigung einzuschränken, die einem Stammobjekt zugewiesen und von der untergeordneten Entität geerbt wurde.
+
+
+TIP: Sofern die Sicherheitsrichtlinien Ihres Unternehmens keine restriktiveren Berechtigungen erfordern, empfiehlt es sich, dem Root-Objekt (auch als Stammordner bezeichnet) Berechtigungen zuzuweisen.
+
+
+
+== Berechtigungen und nicht vSphere Objekte
+
+Die von Ihnen erstellte Berechtigung wird auf ein nicht-vSphere-Objekt angewendet. Beispielsweise ist ein Storage-System kein vSphere-Objekt. Wenn sich eine Berechtigung auf ein Speichersystem bezieht, sollten Sie die Berechtigung, die diese Berechtigung enthält, ONTAP-Tools für das VMware vSphere-Stammobjekt zuweisen, da es kein vSphere-Objekt gibt, dem Sie es zuweisen können.
+
+Beispielsweise sollten alle Berechtigungen, die eine Berechtigung wie ONTAP Tools für VMware vSphere-Berechtigung „Speichersysteme hinzufügen/ändern/überspringen“ enthalten, auf der Root-Objektebene zugewiesen werden.
+
+
+
+== Ändern von Berechtigungen
+
+Sie können jederzeit eine Berechtigung ändern.
+
+Wenn Sie die Berechtigungen innerhalb einer Berechtigung ändern, muss sich der mit dieser Berechtigung verknüpfte Benutzer abmelden und sich dann wieder anmelden, um die aktualisierte Berechtigung zu aktivieren.

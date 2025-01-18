@@ -1,0 +1,6 @@
+---
+section: recover
+title: ONTAP-Tools wiederherstellen
+entries:
+- title: Stellen Sie die Einrichtung Ihrer ONTAP Tools wieder her
+  url: "/recover/recovery-deployment.html"

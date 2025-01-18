@@ -1,0 +1,34 @@
+---
+permalink: configure/configure-esx-server-multipath-and-timeout-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP Tools für VMware vSphere überprüft und setzt die Multipathing-Einstellungen für den ESXi Host und die HBA-Zeitüberschreitungseinstellungen, die für NetApp Storage-Systeme am besten geeignet sind. 
+---
+= Konfigurieren Sie die Multipath- und Timeout-Einstellungen des ESXi-Servers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die ONTAP Tools für VMware vSphere prüfen und legen die Multipath-Einstellungen für ESXi Hosts und die HBA-Zeitüberschreitungseinstellungen fest, die für NetApp Storage-Systeme am besten geeignet sind.
+
+*Über diese Aufgabe*
+
+Dieser Prozess kann je nach Konfiguration und Systemlast sehr viel Zeit in Anspruch nehmen. Der Aufgabenfortschritt wird im Fenster Letzte Aufgaben angezeigt. Wenn die Aufgaben abgeschlossen sind, wird das Symbol für die Warnung des Host-Status durch das Symbol Normal oder das Symbol Ausstehender Neustart ersetzt.
+
+*Schritte*
+
+. Klicken Sie auf der VMware vSphere Web Client-Startseite auf *Hosts und Cluster*.
+. Klicken Sie mit der rechten Maustaste auf einen Host und wählen Sie *NetApp ONTAP Tools* > *Host-Daten aktualisieren*.
+. Klicken Sie auf der Shortcuts-Seite unter dem Plug-ins-Bereich auf *NetApp ONTAP Tools*.
+. Gehen Sie in der Übersicht (Dashboard) des ONTAP Tools for VMware vSphere Plug-ins zur ESXi Host-Compliance-Karte.
+. Wählen Sie den Link *Empfohlene Einstellungen anwenden*.
+. Wählen Sie im Fenster *empfohlene Hosteinstellungen anwenden* die Hosts aus, die Sie den von NetApp empfohlenen Hosteinstellungen entsprechen möchten, und klicken Sie auf *Weiter*.
++
+
+NOTE: Sie können den ESXi-Host erweitern, um die aktuellen Werte anzuzeigen.
+
+. Wählen Sie auf der Einstellungsseite die empfohlenen Werte nach Bedarf aus.
+. Überprüfen Sie im Übersichtsfenster die Werte und klicken Sie auf *Fertig stellen*. Sie können den Fortschritt im Fenster Letzte Aufgabe verfolgen.
+

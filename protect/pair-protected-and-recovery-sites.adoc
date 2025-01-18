@@ -1,0 +1,41 @@
+---
+permalink: protect/pair-protected-and-recovery-sites.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie sollten die mit Ihrem vSphere-Client erstellten geschützten und Recovery-Standorte koppeln, um Storage Replication Adapter \ (SRA\) zur Erkennung der Speichersysteme zu aktivieren.' 
+---
+= Kombinieren Sie geschützte Standorte und Recovery-Standorte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten die geschützten und Recovery-Standorte, die mit Ihrem vSphere Client erstellt wurden, koppeln, um Storage Replication Adapter (SRA) zur Erkennung der Speichersysteme zu aktivieren.
+
+
+NOTE: Storage Replication Adapter (SRA) unterstützt keine Fan-out-SnapMirror-Konfigurationen. Bei SnapMirror Fan-out-Konfigurationen wird ein Quell-Volume auf zwei unterschiedliche Ziele repliziert. Diese stellen während der Wiederherstellung ein Problem dar, wenn VMware Live Site Recovery die virtuelle Maschine vom Ziel wiederherstellen muss.
+
+*Was Sie brauchen*
+
+* VMware Live Site Recovery sollte auf den geschützten und Recovery-Standorten installiert sein.
+* SRA sollte auf den geschützten und den Recovery-Standorten installiert sein.
+
+
+*Schritte*
+
+. Doppelklicken Sie auf der vSphere Client-Startseite auf *Site Recovery* und klicken Sie auf *Sites*.
+. Klicken Sie Auf *Objects* > *Aktionen* > *Pair Sites*.
+. Geben Sie im Dialogfeld *Site Recovery Manager Servers* die Adresse des Platform Services Controller des geschützten Standorts ein, und klicken Sie dann auf *Next*.
+. Gehen Sie im Abschnitt vCenter Server auswählen folgendermaßen vor:
++
+.. Stellen Sie sicher, dass der vCenter Server des geschützten Standorts als übereinstimmender Kandidat für das Pairing angezeigt wird.
+.. Geben Sie die SSO-Administratoranmeldedaten ein, und klicken Sie dann auf *Fertig stellen*.
+
+
+. Wenn Sie dazu aufgefordert werden, klicken Sie auf *Ja*, um die Sicherheitszertifikate zu akzeptieren.
+
+
+*Ergebnis*
+
+Sowohl die geschützten als auch die Wiederherstellungsstandorte werden im Dialogfeld Objekte angezeigt.

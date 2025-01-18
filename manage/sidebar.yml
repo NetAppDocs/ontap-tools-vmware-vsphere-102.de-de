@@ -1,0 +1,82 @@
+---
+section: manage
+title: Management von ONTAP-Tools
+entries:
+- title: NetApp ONTAP Tools für VMware vSphere Plugin – Dashboard-Übersicht
+  url: "/configure/dashboard-overview.html"
+- title: Managen von Datastores
+  entries:
+  - title: Erstellen eines Datenspeichers
+    url: "/configure/create-vvols-datastore.html"
+  - title: Mounten Sie NFS- und VMFS-Datastore
+    url: "/manage/mount-datastores-on-host.html"
+  - title: Unmounten Sie den NFS- und VMFS-Datastore
+    url: "/manage/unmount-datastores-on-host.html"
+  - title: Mounten Sie einen VVols Datastore
+    url: "/manage/mount-a-vvols-datastore.html"
+  - title: Redimensionierung des NFS- und VMFS-Datenspeichers
+    url: "/manage/resize-datastores.html"
+  - title: Erweitern Sie den vVol Datastore
+    url: "/manage/expand-storage-of-vvol-datastore.html"
+  - title: VVols Datastore verkleinern
+    url: "/manage/remove-storage-from-a-vvols-datastore.html"
+  - title: Löschen Sie Datastores
+    url: "/manage/delete-ds.html"
+  - title: ONTAP-Speicheransichten für Datastores
+    url: "/manage/storage-view-datastore.html"
+  - title: Storage-Ansicht der virtuellen Maschine
+    url: "/manage/virtual-machine-storage-view-datastore.html"
+- title: Managen von Storage-Schwellenwerten
+  url: "/manage/manage-storage-threshold.html"
+- title: Managen von Storage-Back-Ends
+  url: "/manage/storage-backend.html"
+- title: Verwalten von vCenter Server-Instanzen
+  url: "/manage/manage-vcenter.html"
+- title: Verwalten von Zertifikaten
+  url: "/manage/certificate-manage.html"
+- title: Verwalten von Initiatorgruppen und Exportrichtlinien
+  url: "/manage/igroup-management.html"
+- title: Zugriff auf ONTAP Tools für die VMware vSphere Wartungskonsole
+  entries:
+  - title: Überblick über die ONTAP Tools für die VMware vSphere Wartungskonsole
+    url: "/manage/maintenance-console.html"
+  - title: Konfigurieren Sie den Zugriff auf die Remote-Diagnose
+    url: "/manage/configure-remote-diagnostic-access.html"
+  - title: Starten Sie SSH auf anderen Nodes
+    url: "/manage/start-the-ssh-on-other-nodes.html"
+  - title: Aktualisieren Sie den vCenter-Server und die ONTAP-Anmeldeinformationen
+    url: "/manage/update-vcenter-credentials.html"
+- title: Berichte zum ONTAP-Tool
+  url: "/manage/reports.html"
+- title: Sammeln Sie die Protokolldateien
+  url: "/manage/collect-the-log-files.html"
+- title: Management von Virtual Machines
+  entries:
+  - title: Überlegungen zum Migrieren oder Klonen von Virtual Machines
+    url: "/manage/migrate-virtual-machines.html"
+  - title: Migrieren Sie Virtual Machines mit NFS- und VMFS-Datastores zu VVols Datastores
+    url: "/manage/migrate-standard-virtual-machines-to-vvols-datastores.html"
+  - title: VASA-Bereinigung
+    url: "/manage/delete-virtual-machines.html"
+- title: Erkennen von Storage-Systemen und Hosts
+  url: "/configure/discover-storage-systems-and-hosts.html"
+- title: Ändern der ESXi-Hosteinstellungen
+  url: "/manage/edit-esxi-host-settings.html"
+- title: Passwörter verwalten
+  entries:
+  - title: Ändern Sie das Kennwort des ONTAP Tools Managers
+    url: "/manage/change-manager-password.html"
+  - title: Kennwort des ONTAP Tools Managers zurücksetzen
+    url: "/manage/reset-manager-password.html"
+  - title: Benutzerkennwort der Anwendung zurücksetzen
+    url: "/manage/reset-app-password.html"
+  - title: Setzt das Benutzerpasswort der Wartungskonsole zurück
+    url: "/manage/reset-maint-password.html"
+- title: Volumes bereinigen
+  url: "/manage/delete-deployment.html"
+- title: Verwalten Sie den Schutz des Host-Clusters
+  entries:
+  - title: Ändern Sie den Schutz des Host-Clusters
+    url: "/manage/edit-hostcluster-protection.html"
+  - title: Entfernen Sie den Host-Cluster-Schutz
+    url: "/manage/delete-hostcluster-protection.html"

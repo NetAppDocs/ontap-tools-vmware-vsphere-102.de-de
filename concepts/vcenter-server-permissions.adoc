@@ -1,0 +1,75 @@
+---
+permalink: concepts/vcenter-server-permissions.html 
+sidebar: sidebar 
+keywords:  
+summary: Der vCenter Server erkennt Berechtigungen und keine Berechtigungen. Jede vCenter Server-Berechtigung besteht aus drei Komponenten. 
+---
+= Komponenten von vCenter Server-Berechtigungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Der vCenter Server erkennt Berechtigungen und keine Berechtigungen. Jede vCenter Server-Berechtigung besteht aus drei Komponenten.
+
+Der vCenter Server verfügt über die folgenden Komponenten:
+
+* Mindestens eine Berechtigung (die Rolle)
++
+Die Berechtigungen definieren die Aufgaben, die ein Benutzer ausführen kann.
+
+* VSphere Objekt
++
+Das Objekt ist das Ziel für die Aufgaben.
+
+* Ein Benutzer oder eine Gruppe
++
+Der Benutzer oder die Gruppe definiert, wer die Aufgabe ausführen kann.
+
+
+
+
+NOTE: In diesem Diagramm zeigen die grauen Felder Komponenten im vCenter Server an, und die weißen Felder geben die Komponenten an, die im Betriebssystem vorhanden sind, auf dem vCenter Server ausgeführt wird.
+
+image:../media/permission-updated-graphic.gif["Abbildung der Berechtigungskomponenten"]
+
+
+
+== Berechtigungen
+
+ONTAP Tools für VMware vSphere beinhalten zwei Arten von Berechtigungen:
+
+* Native vCenter Server-Berechtigungen
++
+Diese Berechtigungen werden mit dem vCenter Server geliefert.
+
+* Spezifische Berechtigungen für ONTAP-Tools
++
+Diese Berechtigungen werden für bestimmte ONTAP-Tools für VMware vSphere-Tasks definiert. Sie sind einzigartig in den ONTAP Tools für VMware vSphere.
+
+
+
+ONTAP-Tools für VMware vSphere-Tasks erfordern sowohl ONTAP-Tools-spezifische Berechtigungen als auch native vCenter Server-Berechtigungen. Diese Berechtigungen stellen die „`Rolle`“ für den Benutzer dar. Eine Berechtigung kann mehrere Berechtigungen haben. Diese Berechtigungen gelten für einen Benutzer, der beim vCenter Server angemeldet ist.
+
+
+NOTE: Zur Vereinfachung der Arbeit mit RBAC für vCenter Server bietet ONTAP Tools für VMware vSphere mehrere Standardrollen, die alle spezifischen und nativen Berechtigungen von ONTAP enthalten, die für die Ausführung von ONTAP Tools für VMware vSphere Aufgaben erforderlich sind.
+
+Wenn Sie die Berechtigungen innerhalb einer Berechtigung ändern, sollte sich der Benutzer, der mit dieser Berechtigung verknüpft ist, ausloggen und sich dann anmelden, um die aktualisierte Berechtigung zu aktivieren.
+
+
+
+== VSphere Objekte
+
+Berechtigungen werden mit vSphere Objekten verknüpft, z. B. vCenter Server, ESXi Hosts, Virtual Machines, Datastores, Datacenter, Und Ordner. Sie können jedem vSphere-Objekt Berechtigungen zuweisen. Auf Grundlage der Berechtigung, die einem vSphere-Objekt zugewiesen ist, bestimmt der vCenter Server, wer welche Aufgaben auf dem Objekt ausführen kann. Für ONTAP-Tools für VMware vSphere-spezifische Aufgaben werden Berechtigungen nur auf der Root-Ordnerebene (vCenter Server) und nicht auf einer anderen Einheit zugewiesen und validiert. Mit Ausnahme des VAAI-Plug-in-Betriebs, wenn Berechtigungen für den betreffenden ESXi-Host validiert werden.
+
+
+
+== Benutzer und Gruppen
+
+Sie können Active Directory (oder den lokalen vCenter Server-Rechner) verwenden, um Benutzer und Benutzergruppen einzurichten. Sie können dann vCenter Server-Berechtigungen verwenden, um diesen Benutzern oder Gruppen Zugriff zu gewähren, damit sie spezifische ONTAP-Tools für VMware vSphere-Aufgaben ausführen können.
+
+
+NOTE: Diese vCenter Server-Berechtigungen gelten für ONTAP-Tools für VMware vSphere vCenter-Benutzer, nicht für ONTAP-Tools für VMware vSphere-Administratoren. Standardmäßig haben ONTAP-Tools für VMware vSphere-Administratoren vollen Zugriff auf das Produkt und benötigen keine ihnen zugewiesenen Berechtigungen.
+
+Benutzern und Gruppen sind ihnen keine Rollen zugewiesen. Sie erhalten Zugriff auf eine Rolle, indem sie Teil einer vCenter Server-Berechtigung sind.

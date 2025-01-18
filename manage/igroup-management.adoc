@@ -1,0 +1,28 @@
+---
+permalink: manage/igroup-management.html 
+sidebar: sidebar 
+keywords:  
+summary: In ONTAP werden Exportrichtlinien verwendet, um Hosts auf den Volume-Datenpfad zuzugreifen, und Initiatorgruppen werden verwendet, um ESXi Hosts den Zugriff auf den LUN-Datenpfad zu ermöglichen. 
+---
+= Verwalten von Initiatorgruppen und Exportrichtlinien
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In ONTAP werden Exportrichtlinien verwendet, um Hosts einen Datenzugriff auf Volume-Pfaden zu ermöglichen und Initiatorgruppen werden verwendet, um ESXi Hosts den Datenzugriff auf dem Datenpfad mit der logischen Einheitennummer (LUN) zu ermöglichen. Die ONTAP Tools für VMware vSphere erleichtern die igroup-Erstellung und bieten umfassende, intuitive Workflows. Um Konsistenz zu gewährleisten, wird die direkte iGroup-Erstellung auf Speicherplattformen nicht unterstützt.
+
+Wenn Datastores für virtuelle Volumes erstellt oder auf Hosts in vCenter Server gemountet werden, müssen die Hosts abhängig vom Protokolltyp des Datastore Zugriff auf Volumes (NFS) oder LUNs (iSCSI) erhalten.
+
+Die Exportpolitik ist dynamisch und die neue Exportpolitik wird mit dem Namensformat Dreizack-UUID erstellt. Gehen Sie auf Ihrem ONTAP System Manager zu *Speicher* > *Speicher-VMs* > *[Name der Speicher-VM]* > *Einstellungen* > *Exportrichtlinien*, um die Exportrichtlinie anzuzeigen.
+
+Die Initiatorgruppen und Exportrichtlinien in den ONTAP Tools für VMware vSphere werden effizient gemanagt und bieten folgende Vorteile:
+
+* Unterstützt migrierte Exportrichtlinien und Initiatorgruppen.
+* Keine Unterbrechung der ein- und Ausgabevorgänge der virtuellen Maschine.
+* Unterstützt das Mounten auf zusätzlichen Hosts ohne manuelles Eingreifen.
+* Minimiert den Bedarf zum Managen der Anzahl von Initiatorgruppen und Exportrichtlinien.
+* Ein Garbage Collector löscht automatisch alle nicht verwendeten verwalteten Initiatorgruppen und exportiert Richtlinien in regelmäßigen Abständen.
+* Wenn ein Datastore auf Host-Cluster-Ebene bereitgestellt wird, wird die Initiatorgruppe mit allen Host-Initiatoren unter dem Host-Cluster erstellt, die der Initiatorgruppe hinzugefügt werden.
+

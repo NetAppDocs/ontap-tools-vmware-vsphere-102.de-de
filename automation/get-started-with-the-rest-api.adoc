@@ -1,0 +1,273 @@
+---
+sidebar: sidebar 
+permalink: automation/get-started-with-the-rest-api.html 
+keywords: REST API 
+summary: Der Zugriff auf die API bietet eine gewisse Perspektive, bevor Sie mit den komplexeren Workflow-Prozessen bei Live-Einrichtung beginnen. 
+---
+= Legen Sie los mit DER REST API
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können schnell damit beginnen, die ONTAP Tools für VMware vSphere REST API zu verwenden. Der Zugriff auf die API bietet eine gewisse Perspektive, bevor Sie mit den komplexeren Workflow-Prozessen bei Live-Einrichtung beginnen.
+
+
+
+== Hallo Welt
+
+Sie können einen einfachen Befehl auf Ihrem System ausführen, um zu beginnen, die ONTAP-Tools für die REST-API von VMware vSphere zu verwenden und die Verfügbarkeit zu bestätigen.
+
+.Bevor Sie beginnen
+* Stellen Sie sicher, dass das Curl-Dienstprogramm auf Ihrem System verfügbar ist.
+* IP-Adresse oder Hostname der ONTAP-Tools für VMware vSphere Server
+* Benutzername und Passwort für ein Konto mit Zugriffsberechtigung auf ONTAP Tools für VMware vSphere REST API.
+
+
+
+NOTE: Wenn Ihre Anmeldeinformationen Sonderzeichen enthalten, müssen Sie diese auf der Grundlage der verwendeten Shell so formatieren, dass sie für Curl akzeptabel sind. Sie können beispielsweise vor jedem Sonderzeichen einen umgekehrten Schrägstrich einfügen oder die gesamte Zeichenfolge in einfache Anführungszeichen umbrechen `username:password` .
+
+.Schritt
+Führen Sie bei der Befehlszeilenschnittstelle Folgendes aus, um die Plug-in-Informationen abzurufen:
+
+`curl -X GET -u username:password -k "\https://<ip_address>/api/hosts?fields=IncludePluginInfo"`
+
+Beispiel:
+
+`curl -X GET -u admin:password -k "'\https://10.225.87.97/api/hosts?fields=IncludePluginInfo"`
+
+
+
+== Zugriff auf ONTAP Tools für VMware vSphere REST-API
+
+Sie können auf die ONTAP REST API auf unterschiedliche Weise zugreifen.
+
+
+
+== Netzwerküberlegungen
+
+Sie können über folgende Schnittstellen eine Verbindung zur REST API herstellen:
+
+* Cluster-Management-LIF
+* Node Management-LIF
+* SVM-Management-LIF
+
+
+Die von Ihnen ausgewählte LIF sollte zur Unterstützung des HTTPS-Managementprotokolls konfiguriert sein. Außerdem sollte die Firewall-Konfiguration in Ihrem Netzwerk den HTTPS-Datenverkehr zulassen.
+
+
+NOTE: Sie sollten immer eine Cluster-Management-LIF verwenden. Dadurch werden die API-Anforderungen über alle Nodes verteilt und Knoten, die offline sind oder Konnektivitätsprobleme haben, werden vermieden. Wenn Sie mehrere Cluster-Management-LIFs konfiguriert haben, entsprechen diese alle dem Zugriff auf die REST-API.
+
+
+
+== Eingabevariablen, die eine API-Anforderung steuern
+
+Sie können steuern, wie ein API-Aufruf über Parameter und Variablen verarbeitet wird, die in der HTTP-Anforderung festgelegt sind.
+
+
+
+== HTTP-Methoden
+
+Die folgende Tabelle zeigt die von ONTAP-Tools für die VMware vSphere REST API unterstützten HTTP-Methoden.
+
+
+NOTE: Nicht alle HTTP-Methoden sind an jedem REST-Endpunkt verfügbar.
+
+|===
+| HTTP-Methode | Beschreibung 
+
+
+| GET | Ruft Objekteigenschaften auf einer Ressourceninstanz oder -Sammlung ab. 
+
+
+| POST | Erstellt eine neue Ressourceninstanz basierend auf der angegebenen Eingabe. 
+
+
+| Löschen | Löscht eine vorhandene Ressourceninstanz. 
+
+
+| PUT | Ändert eine vorhandene Ressourceninstanz. 
+|===
+
+
+== Anfragekopfzeilen
+
+Sie sollten mehrere Header in die HTTP-Anfrage aufnehmen.
+
+
+
+=== Inhaltstyp
+
+Wenn der Anforderungsinstanz JSON enthält, sollte dieser Header auf _Application/json_ gesetzt werden.
+
+
+
+=== Akzeptieren
+
+Dieser Header sollte auf _Application/json_ gesetzt werden.
+
+
+
+=== Autorisierung
+
+Die grundlegende Authentifizierung sollte mit dem Benutzernamen und dem Passwort als base64-String codiert werden.
+
+
+
+== Text anfordern
+
+Der Inhalt der Anfraentext variiert je nach Anruf. Der HTTP-Request-Text besteht aus einem der folgenden Elemente:
+
+* JSON-Objekt mit Eingabevariablen
+* Leer
+
+
+
+
+== Objekte filtern
+
+Wenn Sie einen API-Aufruf ausgeben, der GET verwendet, können Sie die zurückgegebenen Objekte anhand eines beliebigen Attributs einschränken oder filtern. Sie können beispielsweise einen genauen Wert angeben, der übereinstimmt:
+
+`<field>=<query value>`
+
+Neben einer genauen Übereinstimmung stehen auch andere Operatoren zur Verfügung, um einen Satz von Objekten über einen Wertebereich zurückzugeben. Die ONTAP Tools für DIE REST-API von VMware vSphere unterstützen die in der folgenden Tabelle aufgeführten Filteroperatoren.
+
+|===
+| Operator | Beschreibung 
+
+
+| = | Gleich 
+
+
+| < | Kleiner als 
+
+
+| > | Größer als 
+
+
+| &Lt;= | Kleiner oder gleich 
+
+
+| >= | Größer oder gleich 
+
+
+| AKTUALISIERUNG | Oder 
+
+
+| ! | Nicht gleich 
+
+
+| * | Gierige Wildcard 
+|===
+Sie können auch eine Sammlung von Objekten zurückgeben, basierend darauf, ob ein bestimmtes Feld gesetzt wird oder nicht, indem Sie das Schlüsselwort *Null* oder dessen Negation *!null* als Teil der Abfrage verwenden.
+
+
+NOTE: Nicht festgelegte Felder werden in der Regel von übereinstimmenden Abfragen ausgeschlossen.
+
+
+
+== Es werden bestimmte Objektfelder angefordert
+
+Standardmäßig gibt die Ausgabe eines API-Aufrufs mithilfe VON GET nur die Attribute zurück, die das Objekt oder die Objekte eindeutig identifizieren. Dieser minimale Feldsatz dient als Schlüssel für jedes Objekt und variiert je nach Objekttyp. Sie können mithilfe des Abfrageparameters weitere Objekteigenschaften wie folgt auswählen `fields` :
+
+
+
+=== Allgemeine oder Standardfelder
+
+Geben Sie *Fields=** an, um die am häufigsten verwendeten Objektfelder abzurufen. Diese Felder werden normalerweise im lokalen Serverspeicher verwaltet oder erfordern nur wenig Verarbeitung für den Zugriff. Dies sind die gleichen Eigenschaften, die für ein Objekt zurückgegeben werden, nachdem GET mit einem URL-Pfadschlüssel (UUID) verwendet wurde.
+
+
+
+=== Alle Felder
+
+Geben Sie *fields=*** an, um alle Objektfelder abzurufen, einschließlich derer, die für den Zugriff auf zusätzliche Serververarbeitung erforderlich sind.
+
+
+
+=== Benutzerdefinierte Feldauswahl
+
+Geben Sie mit *fields=<field_Name>* das genaue Feld ein. Wenn Sie mehrere Felder anfordern, sollten die Werte durch Kommas ohne Leerzeichen getrennt werden.
+
+
+IMPORTANT: Als Best Practice sollten Sie immer die gewünschten Felder identifizieren. Sie sollten nur die gemeinsamen Felder oder alle Felder abrufen, wenn Sie dies benötigen. Welche Felder sind als „Common“ klassifiziert und mit _fields=*_ zurückgegeben werden, wird durch NetApp aufgrund der internen Performance-Analyse bestimmt. Die Klassifizierung eines Felds kann sich in zukünftigen Releases ändern.
+
+
+
+== Sortieren von Objekten im Ausgabungsset
+
+Die Datensätze in einer Ressourcensammlung werden in der vom Objekt definierten Standardreihenfolge zurückgegeben. Sie können die Reihenfolge mit dem Abfrageparameter mit dem Feldnamen und der Sortierrichtung wie folgt ändern `order_by` :
+
+`order_by=<field name> asc|desc`
+
+Sie können beispielsweise das Typfeld in absteigender Reihenfolge, gefolgt von id in aufsteigender Reihenfolge sortieren:
+
+`order_by=type desc, id asc`
+
+* Wenn Sie ein Sortierfeld angeben, aber keine Richtung angeben, werden die Werte in aufsteigender Reihenfolge sortiert.
+* Wenn Sie mehrere Parameter eingeben, sollten Sie die Felder durch ein Komma trennen.
+
+
+
+
+== Paginierung beim Abrufen von Objekten in einer Sammlung
+
+Wenn Sie einen API-Aufruf über GET für den Zugriff auf eine Sammlung von Objekten desselben Typs ausgeben, versucht ONTAP Tools für VMware vSphere anhand von zwei Einschränkungen so viele Objekte wie möglich zurückzugeben. Mit zusätzlichen Abfrageparametern auf der Anforderung können Sie jede dieser Einschränkungen steuern. Die erste Bedingung, die für eine bestimmte GET-Anforderung erreicht wurde, beendet die Anforderung und begrenzt damit die Anzahl der zurückgegebenen Datensätze.
+
+
+NOTE: Wenn eine Anfrage endet, bevor sie alle Objekte anführt, enthält die Antwort den Link, der zum Abrufen des nächsten Stapels von Datensätzen benötigt wird.
+
+
+
+=== Die Anzahl der Objekte wird begrenzt
+
+Standardmäßig gibt ONTAP-Tools für VMware vSphere maximal 10,000 Objekte für eine GET-Anforderung zurück. Sie können diese Grenze mit dem Abfrageparameter _max_Records_ ändern. Beispiel:
+
+`max_records=20`
+
+Die Anzahl der zurückgegebenen Objekte kann unter dem maximal wirkenden Wert liegen, basierend auf der zugehörigen Zeitbeschränkung sowie der Gesamtanzahl der Objekte im System.
+
+
+
+=== Begrenzung der Zeit, die zum Abrufen der Objekte verwendet wird
+
+Standardmäßig gibt ONTAP-Tools für VMware vSphere so viele Objekte wie möglich innerhalb der für die GET-Anforderung zulässigen Zeit zurück. Die Standard-Zeitüberschreitung beträgt 15 Sekunden. Sie können diese Grenze mit dem Abfrageparameter _return_timeout_ ändern. Beispiel:
+
+`return_timeout=5`
+
+Die Anzahl der zurückgegebenen Objekte kann aufgrund der zugehörigen Einschränkung für die Anzahl der Objekte sowie der Gesamtanzahl der Objekte im System geringer sein als die maximal wirkende Anzahl.
+
+
+
+=== Verengung des Ergebnisset
+
+Bei Bedarf können Sie diese beiden Parameter mit zusätzlichen Abfrageparametern kombinieren, um den Ergebnissatz einzugrenzen. Im Folgenden werden z. B. bis zu 10 EMS-Ereignisse zurückgegeben, die nach der angegebenen Zeit generiert wurden:
+
+`time=> 2018-04-04T15:41:29.140265Z&max_records=10`
+
+Sie können mehrere Anfragen zur Seite durch die Objekte ausgeben. Jeder nachfolgende API-Aufruf sollte einen neuen Zeitwert verwenden, der auf dem letzten Ereignis des letzten Ergebnisset basiert.
+
+
+
+== Größeneigenschaften
+
+Die bei einigen API-Aufrufen verwendeten Eingabewerte sowie bestimmte Abfrageparameter sind numerisch. Anstatt eine ganze Zahl in Byte bereitzustellen, können Sie optional ein Suffix wie in der folgenden Tabelle aufgeführt verwenden.
+
+|===
+| Suffix | Beschreibung 
+
+
+| KB | KB-Kilobyte (1024 Byte) oder Kibibyte 
+
+
+| MB | MB Megabyte (KB x 1024 Byte) oder Mebibyte 
+
+
+| GB | GB Gigabyte (MB x 1024 Byte) oder Gibibyte 
+
+
+| TB | TB Terabyte (GB x 1024 byes) oder Tebibyte 
+
+
+| PB | PB (TB x 1024 byes) oder Pebibyte 
+|===

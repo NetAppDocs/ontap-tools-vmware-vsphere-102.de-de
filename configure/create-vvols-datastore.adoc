@@ -1,0 +1,138 @@
+---
+permalink: configure/create-vvols-datastore.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie können einen VVols-Datastore mit neuen Volumes oder mit vorhandenen Volumes erstellen. Zudem ist es möglich, einen VVols-Datastore mit einer Kombination aus vorhandenen Volumes und neuen Volumes zu erstellen. 
+---
+= Erstellen eines Datenspeichers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie einen Datastore auf Host-Cluster-Ebene erstellen, wird der Datastore auf allen Hosts des Ziels erstellt und gemountet. Die Aktion wird nur aktiviert, wenn der aktuelle Benutzer über die Berechtigung zur Ausführung verfügt.
+
+Der Assistent „Datastore erstellen“ unterstützt die Erstellung von NFS-, VMFS- und VVols-Datenspeichern.
+
+* Sie können nur VMFS-Datastores auf einem geschützten Cluster erstellen. Wenn Sie einem geschützten Cluster einen VMFS Datastore hinzufügen, wird dieser automatisch gesichert.
+* Sie können keinen Datastore in einem Rechenzentrum erstellen, das über einen oder mehrere geschützte Hostcluster verfügt.
+* Sie können keinen Datastore auf dem Host erstellen, wenn der übergeordnete Host-Cluster durch eine Beziehung des Policy-Typs Automated Failover Duplex geschützt ist (einheitliche/nicht-einheitliche Konfiguration).
+* Sie können einen VMFS Datenspeicher auf einem Host erstellen, nur wenn diese asynchrone Beziehung vorhanden ist.
+
+
+[role="tabbed-block"]
+====
+.Erstellen Sie einen VVols-Datastore
+--
+Sie können einen VVols-Datastore entweder mit neuen Volumes oder mit vorhandenen Volumes erstellen. Sie können keinen VVols-Datastore mit einer Kombination aus vorhandenen und neuen Volumes erstellen.
+
+
+NOTE: Überprüfen Sie, ob die Root-Aggregate nicht der SVM zugeordnet sind.
+
+.Bevor Sie beginnen
+Stellen Sie sicher, dass der VASA-Anbieter beim ausgewählten vCenter registriert ist.
+
+.Schritte
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Klicken Sie mit der rechten Maustaste auf ein Hostsystem oder einen Hostcluster oder ein Rechenzentrum und wählen Sie *NetApp ONTAP Tools* > *Datastore erstellen*.
+. Wählen Sie im Bereich *Typ* unter *Datastore Type* die Option VVols aus.
+. Geben Sie im Bereich *Name und Protokoll* die Informationen *Datastore Name* und *Protocol* an.
+. Wählen Sie im Bereich *Storage* *Platform* und *Storage VM* aus. Wählen Sie im Abschnitt *Advanced options* die Option Custom Export Policy (für NFS-Protokoll) oder Custom Initiator Group Name (für iSCSI amd FC-Protokoll) aus.
++
+** Mit Plattform- und asymmetrischen Optionen können Sie die Dropdown-Optionen für SVMs herausfiltern. Sie sollten die SVM auswählen, die erstellt werden soll, oder die Volumes für die Datastore-Erstellung verwenden.
+** Die Umschalttaste *Asymmetric* ist nur sichtbar, wenn iSCSI im vorherigen Schritt ausgewählt wurde und Leistung oder Kapazität im Dropdown-Menü Plattform ausgewählt ist.
+** Wählen Sie die Schaltfläche *Asymmetric* für die AFF-Plattform und deaktivieren Sie sie für die ASA-Plattform.
+
+
+. Im Bereich *Speicherattribute* können Sie entweder neue Volumes erstellen oder die vorhandenen Volumes verwenden. Beim Erstellen eines neuen Volumes können Sie die QoS auf dem Datastore aktivieren.
+. Überprüfen Sie Ihre Auswahl im Fenster *Zusammenfassung* und klicken Sie auf *Fertig stellen*. Der VVols Datastore wird auf allen Hosts erstellt und gemountet.
+
+
+--
+.Erstellen Sie einen NFS-Datastore
+--
+Ein Datastore des VMware Network File System (NFS) verwendet das NFS-Protokoll, um ESXi-Hosts über ein Netzwerk mit einem Shared Storage-Gerät zu verbinden. NFS-Datastores werden häufig in VMware vSphere Umgebungen verwendet und bieten verschiedene Vorteile, z. B. Einfachheit und Flexibilität.
+
+.Schritte
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Klicken Sie mit der rechten Maustaste auf ein Hostsystem oder einen Hostcluster oder ein Rechenzentrum und wählen Sie *NetApp ONTAP Tools* > *Datastore erstellen*.
+. Wählen Sie im Bereich *Typ* NFS unter *Datastore Type* aus.
+. Geben Sie im Bereich *Name und Protokoll* den Namen, die Größe und die Protokollinformationen des Datastore ein. Wählen Sie in den erweiterten Optionen *Datastore Cluster* und *Kerberos Authentication* aus.
++
+
+NOTE: Kerberos-Authentifizierung ist nur verfügbar, wenn das NFS 4.1-Protokoll ausgewählt ist.
+
+. Wählen Sie im Bereich *Storage* *Platform* und *Storage VM* aus. Sie können *Custom Export Policy* im Abschnitt *Advanced Option* auswählen.
++
+** *Asymmetric* Umschalttaste ist nur sichtbar, wenn Leistung oder Kapazität im Dropdown-Menü Plattform ausgewählt ist.
+** *Any* Option in der Plattform-Dropdown ermöglicht es Ihnen, alle SVMs zu sehen, die Teil des vCenter sind, unabhängig von der Plattform oder asymmetrischen Flagge.
+
+
+. Wählen Sie im Bereich *Speicherattribute* das Aggregat für die Erstellung des Volumes aus. Wählen Sie in den erweiterten Optionen *Space Reserve* und *Enable QoS* je nach Bedarf.
+. Überprüfen Sie die Auswahl im Fenster *Zusammenfassung* und klicken Sie auf *Fertig stellen*.
+
+
+Der NFS-Datastore wird auf allen Hosts erstellt und gemountet.
+
+--
+.Erstellen Sie einen VMFS-Datastore
+--
+Virtual Machine File System (VMFS) ist ein geclustertes Filesystem, das speziell zum Speichern von VM-Dateien in VMware vSphere Umgebungen entwickelt wurde. Sie ermöglicht es mehreren ESXi-Hosts, gleichzeitig auf dieselben VM-Dateien zuzugreifen, was Funktionen wie vMotion und Hochverfügbarkeit ermöglicht.
+
+.Bevor Sie beginnen
+Überprüfen Sie die folgenden Punkte, bevor Sie fortfahren:
+
+* Für jedes Protokoll auf ONTAP-Storage-Seite müssen entsprechende Services und LIF aktiviert werden.
+* Wenn Sie das NVMe/TCP-Protokoll verwenden, führen Sie die folgenden Schritte aus, um den ESXi-Host zu konfigurieren:
++
+.. Überprüfen Sie die https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=san&productid=49677&releases_filter=589,578,518,508,448&deviceCategory=san&details=1&partner=399&Protocols=1&transportTypes=3&isSVA=0&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc["VMware Compatibility Guide"]
++
+
+NOTE: VMware vSphere 7.0 U3 und höher unterstützen das NVMe/TCP-Protokoll. Es wird jedoch VMware vSphere 8.0 und eine neuere Version empfohlen.
+
+.. Überprüfen Sie, ob der NIC-Anbieter (Network Interface Card) ESXi NIC mit NVMe/TCP-Protokoll unterstützt.
+.. Konfigurieren Sie die ESXi-NIC für NVMe/TCP gemäß den Spezifikationen des NIC-Anbieters.
+.. Wenn Sie VMware vSphere 7-Version verwenden, befolgen Sie die Anweisungen auf der VMware-Site https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.storage.doc/GUID-D047AFDD-BC68-498B-8488-321753C408C2.html#GUID-D047AFDD-BC68-498B-8488-321753C408C2["Konfigurieren Sie die VMkernel Bindung für den NVMe over TCP Adapter"], um die NVMe/TCP-Portbindung zu konfigurieren. Wenn Sie VMware vSphere 8 Version verwenden, folgen Sie https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-5F776E6E-62B1-445D-854C-BEA689DD4C92.html#GUID-D047AFDD-BC68-498B-8488-321753C408C2["Konfiguration von NVMe over TCP auf ESXi"], um die NVMe/TCP-Portbindung zu konfigurieren.
+.. Folgen Sie bei VMware vSphere 7 den Anweisungen auf der VMware-Site https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.storage.doc/GUID-8BBD672E-0829-4CF2-84B2-26A3A89ABD2E.html["Aktivieren Sie NVMe over RDMA oder NVMe over TCP-Softwareadapter"], um NVMe/TCP-Softwareadapter zu konfigurieren. Folgen Sie bei VMware vSphere 8 Version, https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-F4B42510-9E6D-4446-816A-5012866E0038.html#GUID-8BBD672E-0829-4CF2-84B2-26A3A89ABD2E["Fügen Sie Software-NVMe-over-RDMA- oder NVMe-over-TCP-Adapter hinzu"] um die NVMe/TCP-Softwareadapter zu konfigurieren.
+.. Führen Sie link:../configure/discover-storage-systems-and-hosts["Erkennen von Storage-Systemen und Hosts"]eine Aktion auf dem ESXi-Host aus. Weitere Informationen finden Sie unter https://community.netapp.com/t5/Tech-ONTAP-Blogs/How-to-Configure-NVMe-TCP-with-vSphere-8-0-Update-1-and-ONTAP-9-13-1-for-VMFS/ba-p/445429["Konfigurieren von NVMe/TCP mit vSphere 8.0 Update 1 und ONTAP 9.13.1 für VMFS-Datenspeicher"]
+
+
+* Wenn Sie das NVME/FC-Protokoll verwenden, führen Sie die folgenden Schritte aus, um den ESXi-Host zu konfigurieren:
++
+.. Aktivieren Sie NVMe over Fabrics (NVMe-of) auf Ihren ESXi Hosts.
+.. Vollständiges SCSI-Zoning
+.. Stellen Sie sicher, dass ESXi-Hosts und das ONTAP-System auf einer physischen und einer logischen Ebene verbunden sind.
+
+
+
+
+Informationen zum Konfigurieren einer ONTAP SVM für das FC-Protokoll finden Sie unter https://docs.netapp.com/us-en/ontap/san-admin/configure-svm-fc-task.html["Konfigurieren Sie eine SVM für FC"].
+
+Weitere Informationen zur Nutzung des NVMe/FC-Protokolls mit VMware vSphere 8.0 finden Sie unter https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["NVMe-of Host-Konfiguration für ESXi 8.x mit ONTAP"].
+
+Weitere Informationen zur Verwendung von NVMe/FC mit VMware vSphere 7.0 finden Sie unter https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["ONTAP NVMe/FC-Host-Konfigurationsleitfaden"] und http://www.netapp.com/us/media/tr-4684.pdf["TR-4684"].
+
+.Schritte
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Klicken Sie mit der rechten Maustaste auf ein Hostsystem oder einen Hostcluster oder einen Datastore und wählen Sie *NetApp ONTAP Tools* > *Datastore erstellen*.
+. Wählen Sie im Bereich *Typ* VMFS unter *Datastore Type* aus.
+. Geben Sie im Bereich *Name und Protokoll* den Namen, die Größe und die Protokollinformationen des Datastore ein. Wählen Sie im Abschnitt *Erweiterte Optionen* des Teilfensters den Datastore-Cluster aus, dem Sie diesen Datastore hinzufügen möchten.
+. Wählen Sie Plattform und Speicher-VM im Bereich *Speicher* aus. Wählen Sie die Schaltfläche Asymmetric Toggle. Geben Sie den *Custom Initiator Group Name* im Abschnitt *Advanced options* des Fensters ein (optional). Sie können entweder eine vorhandene Initiatorgruppe für den Datastore auswählen oder eine neue Initiatorgruppe mit einem benutzerdefinierten Namen erstellen.
++
+Wenn Sie die Option *any* in der Dropdown-Liste der Plattform wählen, sehen Sie alle SVMs, die Teil des vCenter sind, unabhängig von der Plattform oder dem asymmetrischen Flag. Wenn das Protokoll als NVMe/FC oder NVMe/TCP ausgewählt ist, wird ein neues Namespace-Subsystem erstellt und für die Namespace-Zuordnung verwendet. Standardmäßig wird das Namespace-Subsystem unter Verwendung des automatisch generierten Namens erstellt, der den Datastore-Namen enthält. Sie können das Namespace-Subsystem im Feld *Custom Namespace Subsystem Name* in den erweiterten Optionen des Fensters *Storage* umbenennen.
+
+. Wählen Sie im Bereich *Storage attributes* aus dem Dropdown-Menü die Option *Aggregate* aus. Wählen Sie im Abschnitt *Erweiterte Optionen* die Optionen *Platzreserve*, *vorhandenes Volume verwenden* und *QoS* aktivieren aus und geben Sie die erforderlichen Details an.
++
+
+NOTE: Bei der Erstellung eines VMFS-Datastore mit einem NVMe/FC- oder NVMe/TCP-Protokoll kann das vorhandene Volume nicht verwendet werden, müssen Sie ein neues Volume erstellen.
+
+. Überprüfen Sie die Datastore-Details im Bereich *Summary* und klicken Sie auf *Finish*.
++
+
+NOTE: Wenn Sie den Datastore auf einem geschützten Cluster erstellen, sehen Sie eine schreibgeschützte Meldung „der Datastore wird auf einem geschützten Cluster gemountet“. Der VMFS Datastore wird auf allen Hosts erstellt und gemountet.
+
+
+
+--
+====

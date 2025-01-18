@@ -1,0 +1,41 @@
+---
+permalink: protect/map-folder.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie sollten Ihre Ordner auf dem geschützten Standort und dem Wiederherstellungsstandort zuordnen, um die Kommunikation zwischen ihnen zu ermöglichen. 
+---
+= Konfigurieren von Ordnerzuordnungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten Ihre Ordner auf dem geschützten Standort und dem Wiederherstellungsstandort zuordnen, um die Kommunikation zwischen ihnen zu ermöglichen.
+
+*Was Sie brauchen*
+
+Sie sollten die geschützten und Recovery-Standorte verbunden haben.
+
+*Schritte*
+
+. Melden Sie sich am vCenter Server an und klicken Sie auf *Site Recovery* > *Sites*.
+. Wählen Sie Ihre geschützte Site aus und klicken Sie auf *Verwalten*.
+. Wählen Sie auf der Registerkarte Verwalten die Option *Ordnerzuordnungen* aus.
+. Wählen Sie das Symbol *Ordner*, um eine neue Ordnerzuordnung zu erstellen.
++
+Der Assistent zum Erstellen der Ordnerzuordnung wird angezeigt.
+
+. Führen Sie im Assistenten zum Erstellen der Ordnerzuordnung folgende Schritte aus:
++
+.. Wählen Sie *automatisch Zuordnungen für Ordner mit übereinstimmenden Namen vorbereiten* aus und klicken Sie auf *Weiter*.
+.. Wählen Sie die gewünschten Rechenzentrumsobjekte für die geschützten und Recovery-Standorte aus und klicken Sie auf *Zuordnungen hinzufügen*.
+.. Klicken Sie auf *Weiter*, nachdem Zuordnungen erfolgreich erstellt wurden.
+.. Wählen Sie das zuvor verwendete Objekt aus, um eine umgekehrte Zuordnung zu erstellen, und klicken Sie dann auf *Fertig stellen*.
+
+
+
+
+*Ergebnis*
+
+Auf der Seite Ordnerzuordnungen werden die geschützten Site-Ressourcen und die Ressourcen des Recovery-Standorts angezeigt. Sie können die gleichen Schritte für andere Netzwerke in Ihrer Umgebung befolgen.

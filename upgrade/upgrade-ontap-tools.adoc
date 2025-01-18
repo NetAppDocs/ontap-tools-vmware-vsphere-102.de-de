@@ -1,0 +1,79 @@
+---
+permalink: upgrade/upgrade-ontap-tools.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: Upgrade wird sowohl für HA-Implementierungen als auch für Implementierungen ohne HA unterstützt. 
+---
+= Upgrade von ONTAP Tools für VMware vSphere 10.x auf 10.2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Upgrade wird sowohl für HA-Implementierungen als auch für Implementierungen ohne HA unterstützt.
+
+
+NOTE: Um ein Upgrade von ONTAP Tools für VMware vSphere 10.0 auf Version 10.2 durchzuführen, müssen Sie zuerst auf ONTAP Tools für VMware vSphere 10.1 und dann auf Version 10.2 aktualisieren.
+
+*Bevor Sie beginnen*
+
+Wenn Sie ein Upgrade von ONTAP Tools für VMware vSphere 10.0 auf 10.1 durchführen, müssen Sie die folgenden Schritte ausführen, bevor Sie mit dem Upgrade fortfahren:
+
+*Diagnose Aktivieren*
+
+. Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie *4* ein, um Support und Diagnose auszuwählen.
+. Geben Sie *2* ein, um den Zugriff auf die Ferndiagnose zu aktivieren.
+. Geben Sie *y* ein, um das Passwort Ihrer Wahl festzulegen.
+. Melden Sie sich an der VM-IP-Adresse vom Terminal/Putty mit dem Benutzer als 'diag' und dem Passwort an, das im vorherigen Schritt festgelegt wurde.
+
+
+*Backup von MongoDB*
+
+Führen Sie die folgenden Befehle aus, um ein Backup von MongoDB zu erstellen:
+
+* Kn exec -it ntv-mongodb-0 sh - kn ist ein Alias von kubectl -n ntv-System.
+* dev_grep MONGODB_ROOT_PASSWORD - Führen Sie diesen Befehl im Pod aus.
+* „EXIT“ – Führen Sie diesen Befehl aus, um aus dem POD zu kommen.
+* Kn exec ntv-mongodb-0 --mongodump -U ROOT -p MONGODB_ROOT_PASSWORD --Archive=/tmp/mongodb-backup.gz --gzip - Führen Sie diesen Befehl aus, um MONGO_ROOT_PASSWORD set aus dem obigen Befehl zu ersetzen.
+* Kn CP ntv-mongodb-0:/tmp/mongodb-backup.gz ./mongodb-backup.gz - Führen Sie diesen Befehl aus, um das mit dem obigen Befehl erstellte mongodb Backup von Pod zu Host zu kopieren.
+
+
+*Nehmen Sie den Snapshot von allen Volumen*
+
+* Führen Sie den Befehl 'kn get pvc' aus und speichern Sie die Ausgabe des Befehls.
+* Erstellen Sie Snapshots aller Volumes nacheinander mit einer der folgenden Methoden:
++
+** Führen Sie in der CLI den Befehl _Volume Snapshot create -vserver <vserver_name> -Volume <volume_name> -Snapshot <snapshot_name>_ aus
+** Über die Benutzeroberfläche des ONTAP-Systemmanagers können Sie das Volume in der Suchleiste anhand des Namens durchsuchen und dann das Volume durch Klicken auf den Namen öffnen. Wechseln Sie zu Snapshot und fügen Sie den Snapshot dieses Volumes hinzu.
+
+
+
+
+*Nehmen Sie die Momentaufnahme von ONTAP-Tools für VMware vSphere VMs in vCenter (3VMs im Fall der HA-Bereitstellung, 1 VM im Falle einer nicht-HA-Bereitstellung)*
+
+* Wählen Sie in der vSphere-Client-Benutzeroberfläche die VM aus.
+* Gehen Sie zur Registerkarte Snapshots und klicken Sie auf die Schaltfläche *Snapshot erstellen*.
+
+
+Löschen Sie aus dem Protokoll-Bundle die fertig gestellten Pods mit dem Präfix „Generate-Support-Bundle-Job“, bevor Sie das Upgrade durchführen. Wenn derzeit das Support-Bundle generiert wird, warten Sie, bis der Vorgang abgeschlossen ist, und löschen Sie den Pod.
+
+*Schritte*
+
+. Laden Sie ONTAP-Tools für VMware vSphere hoch, aktualisieren Sie ISO in die Content Library.
+. Wählen Sie auf der primären VM-Seite *actions* > *Edit Settings* aus
+. Wählen Sie im Fenster Einstellungen bearbeiten unter dem Feld *CD/DVD-Laufwerk* die ISO-Datei der Inhaltsbibliothek aus.
+. Wählen Sie die ISO-Datei aus und klicken Sie auf *OK*. Aktivieren Sie das Kontrollkästchen Verbunden im Feld *CD/DVD-Laufwerk*. image:../media/primaryvm-edit-settings.png["Einstellungen bearbeiten"]
+. Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie *3* ein, um das Menü Systemkonfiguration auszuwählen.
+. Geben Sie *7* ein, um die Upgrade-Option auszuwählen.
+. Wenn Sie ein Upgrade durchführen, werden die folgenden Aktionen automatisch ausgeführt:
++
+.. Zertifikataktualisierung
+.. Remote-Plug-in-Upgrade
+
+
+

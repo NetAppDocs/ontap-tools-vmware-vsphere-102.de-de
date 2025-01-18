@@ -1,0 +1,39 @@
+---
+permalink: manage/certificate-manage.html 
+sidebar: sidebar 
+keywords:  
+summary: Mit einer einzigen Instanz der ONTAP Tools für VMware vSphere können mehrere vCenter Server-Instanzen gemanagt werden. ONTAP Tools für VMware vSphere werden mit einem selbstsignierten Zertifikat für VASA Provider implementiert. Dadurch kann nur eine vCenter Server-Instanz für VVols-Datastores gemanagt werden. 
+---
+= Verwalten von Zertifikaten
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit einer einzigen Instanz der ONTAP Tools für VMware vSphere können mehrere vCenter Server-Instanzen gemanagt werden. ONTAP Tools für VMware vSphere werden mit einem selbstsignierten Zertifikat für VASA Provider implementiert. Dadurch kann nur eine vCenter Server-Instanz für VVols-Datastores gemanagt werden. Wenn Sie mehrere vCenter Server-Instanzen managen und die VVols-Funktion auf mehreren vCenter Server-Instanzen aktivieren möchten, müssen Sie das selbstsignierte Zertifikat über die Benutzeroberfläche von ONTAP Tools Manager in ein benutzerdefiniertes CA-Zertifikat ändern. Sie können die gleiche Oberfläche verwenden, um alle Zertifikate zu erneuern oder zu aktualisieren.
+
+
+NOTE: Eine andere Load Balancer-IP-Adresse, die verschiedenen Domänen zugeordnet ist, wird nicht unterstützt, wenn Sie ein selbstsigniertes Upgrade auf eine benutzerdefinierte CA durchführen.
+
+*Schritte*
+
+. Starten Sie den ONTAP Tools Manager über einen Webbrowser: `\https://loadBalanceIP:8443/virtualization/ui/`
+. Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
+. Wählen Sie *Certificates* > *VASA Provider* > *Renew*, um die Zertifikate zu erneuern.
++
+
+NOTE: Das System ist offline, bis das Zertifikat erneuert wird.
+
+. Um das selbstsignierte Zertifikat auf ein benutzerdefiniertes CA-Zertifikat zu aktualisieren, wählen Sie *Certificates* > *VASA Provider* > *Upgrade auf CA*.
++
+.. Laden Sie im Popup-Fenster *Upgrade Certificate to Custom CA* das Serverzertifikat, den privaten Schlüssel des Serverzertifikats, das Stammzertifizierungszertifikat und die Zwischenzertifikatdateien hoch. Der QuickInfo enthält eine Beschreibung der Zertifikate.
+.. Geben Sie den Domänennamen ein, für den Sie dieses Zertifikat erstellt haben.
+.. Klicken Sie Auf *Upgrade*.
++
+
+NOTE: Das System ist offline, bis das Upgrade abgeschlossen ist.
+
+
+
+

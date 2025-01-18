@@ -1,0 +1,24 @@
+---
+section: configure
+title: Konfigurieren von ONTAP Tools
+entries:
+- title: Fügen Sie vCenter Server hinzu
+  url: "/configure/add-vcenter.html"
+- title: Registrieren Sie den VASA Provider bei vCenter Server
+  url: "/configure/registration-process.html"
+- title: Installieren Sie das NFS VAAI Plug-in
+  url: "/configure/install-nfs-vaai-plug-in.html"
+- title: Konfigurieren Sie ESXi-Hosteinstellungen
+  entries:
+  - title: Konfigurieren Sie die Multipath- und Timeout-Einstellungen des ESXi-Servers
+    url: "/configure/configure-esx-server-multipath-and-timeout-settings.html"
+  - title: Legen Sie ESXi-Hostwerte fest
+    url: "/configure/esxi-host-values.html"
+- title: Konfigurieren Sie ONTAP-Benutzerrollen und -Berechtigungen
+  url: "/configure/configure-user-role-and-privileges.html"
+- title: Fügen Sie ein Storage-Back-End hinzu
+  url: "/configure/add-storage-backend.html"
+- title: Ordnen Sie ein Storage-Back-End einer vCenter Server-Instanz zu
+  url: "/configure/associate-storage-backend.html"
+- title: Konfigurieren Sie den Netzwerkzugriff
+  url: "/configure/configure-network-access.html"

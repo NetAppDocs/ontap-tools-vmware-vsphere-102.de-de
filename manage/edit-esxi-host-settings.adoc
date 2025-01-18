@@ -1,0 +1,33 @@
+---
+permalink: manage/edit-esxi-host-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: Über das Dashboard der ONTAP Tools für VMware vSphere können Sie Ihre ESXi Host-Einstellungen bearbeiten. 
+---
+= Ändern Sie ESXi Hosteinstellungen mithilfe von ONTAP Tools
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Über das Dashboard der ONTAP Tools für VMware vSphere können Sie Ihre ESXi Host-Einstellungen bearbeiten.
+
+*Was Sie brauchen*
+
+Wenn ein Problem mit den ESXi-Hosteinstellungen auftritt, wird das Problem im Portlet „ESXi-Hostsysteme“ des Dashboards angezeigt. Sie können auf das Problem klicken, um den Hostnamen oder die IP-Adresse des ESXi-Hosts anzuzeigen, der das Problem hat.
+
+*Schritte*
+
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Klicken Sie auf der Shortcuts-Seite unter dem Plug-ins-Bereich auf *NetApp ONTAP Tools*.
+. Gehen Sie in der Übersicht (Dashboard) des ONTAP Tools für VMware vSphere Plug-ins zum Portlet *ESXi Host Compliance*.
+. Wählen Sie den Link *Empfohlene Einstellungen anwenden*.
+. Wählen Sie im Fenster *empfohlene Hosteinstellungen anwenden* die Hosts aus, die Sie den von NetApp empfohlenen Hosteinstellungen entsprechen möchten, und klicken Sie auf *Weiter*.
++
+
+NOTE: Sie können den ESXi-Host erweitern, um die aktuellen Werte anzuzeigen.
+
+. Wählen Sie auf der Einstellungsseite die empfohlenen Werte nach Bedarf aus.
+. Überprüfen Sie im Übersichtsfenster die Werte und klicken Sie auf *Fertig stellen*. Sie können den Fortschritt im Fenster Letzte Aufgabe verfolgen.
+

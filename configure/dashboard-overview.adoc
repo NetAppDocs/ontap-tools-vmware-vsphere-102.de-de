@@ -1,0 +1,39 @@
+---
+permalink: configure/dashboard-overview.html 
+sidebar: sidebar 
+keywords: user roles 
+summary: Wenn Sie im Abschnitt Verknüpfungen des vCenter-Clients das Symbol NetApp ONTAP-Tools für VMware vSphere Plug-in auswählen, wechselt die Benutzeroberfläche zur Übersichtsseite. Diese Seite ähnelt dem Dashboard mit einer Zusammenfassung der ONTAP Tools für VMware vSphere Plug-in. 
+---
+= Dashboard der NetApp ONTAP Tools für VMware vSphere Plug-in – Übersicht
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie im Abschnitt Verknüpfungen des vCenter-Clients das Symbol NetApp ONTAP-Tools für VMware vSphere Plug-in auswählen, wechselt die Benutzeroberfläche zur Übersichtsseite. Diese Seite ähnelt dem Dashboard mit einer Zusammenfassung der ONTAP Tools für VMware vSphere Plug-in.
+
+Im Fall von Enhanced Linked Mode Setup (ELM) wird das Drop-down-Menü vCenter Server SELECT angezeigt, und Sie können einen gewünschten vCenter Server auswählen, um die für ihn relevanten Daten anzuzeigen. Diese Dropdown-Liste ist für alle anderen Listenansichten des Plugins verfügbar. VCenter Server-Auswahl auf einer Seite besteht über die Registerkarten des Plug-ins. image:../media/remote-plugin-dashboard.png["Dashboard-Übersicht"]
+
+Das Dashboard verfügt über mehrere Karten, die verschiedene Elemente des Systems anzeigen. Die folgende Tabelle zeigt die verschiedenen Karten und was sie darstellen.
+
+|===
+
+
+| *Kartenname* | *Beschreibung* 
+
+
+| Status | Die Statuskarte zeigt die Anzahl der hinzugefügten Speicher-Back-Ends sowie den allgemeinen Integritätsstatus von Speicher-Back-Ends und VASA Provider-Status eines vCenter an. Der Status von Storage Back-Ends wird als „funktionstüchtiger“ angezeigt, wenn der Status aller Storage Back-Ends „Normal“ lautet. Der Status „Speicher-Back-Ends“ wird als „fehlerhaft“ angezeigt, wenn eines der Speicher-Back-Ends ein Problem aufweist (Unbekannt/Unerreichbar/herabgesetzt). Wenn Sie auf den Status „fehlerhaft“ klicken, wird eine QuickInfo mit dem Status der Speicher-Back-Ends geöffnet. Sie können auf ein beliebiges Storage-Back-End klicken, um mehr Details zu erhalten. Der Link „Other VASA Provider (VP) States“ zeigt den aktuellen Status des VP an, der auf dem vCenter Server registriert ist. 
+
+
+| Storage Back-Ends – Kapazität | Diese Karte zeigt die aggregierte genutzte und verfügbare Kapazität aller Speicher-Back-Ends für die ausgewählte vCenter Server-Instanz an. 
+
+
+| Virtual Machines | Diese Karte zeigt die 10 wichtigsten VMs nach Performance-Metrik. Sie können auf die Kopfzeile klicken, um die 10 wichtigsten VMs für die ausgewählte Metrik nach aufsteigender oder absteigender Reihenfolge zu erhalten. Die auf der Karte vorgenommenen Änderungen beim Sortieren und Filtern bleiben bestehen, bis Sie den Browser-Cache ändern oder löschen. 
+
+
+| Datenspeicher | Diese Karte zeigt die 10 besten Datastores, sortiert nach einer Performance-Metrik. Sie können auf die Kopfzeile klicken, um die 10 wichtigsten Datastores für die ausgewählte Metrik nach aufsteigender oder absteigender Reihenfolge zu erhalten. Die auf der Karte vorgenommenen Änderungen beim Sortieren und Filtern bleiben bestehen, bis Sie den Browser-Cache ändern oder löschen. Zum Auswählen des Typs der Datastores – NFS, VMFS oder VVols – existiert ein Dropdown-Menü zum Datenspeichertyp. 
+
+
+| ESXi-Host-Compliance-Karte | Diese Karte zeigt den allgemeinen Compliance-Status aller ESXi-Hosts (für das ausgewählte vCenter)-Einstellungen in Bezug auf die empfohlenen NetApp-Host-Einstellungen nach Einstellungsgruppe/Kategorie an. Sie können auf den Link Empfohlene Einstellungen anwenden klicken, um die empfohlenen Einstellungen anzuwenden. Klicken Sie auf Probleme/unbekannt, um die Liste der Hosts anzuzeigen. 
+|===

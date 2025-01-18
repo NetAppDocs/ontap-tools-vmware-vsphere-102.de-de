@@ -1,0 +1,146 @@
+---
+permalink: upgrade/upgrade-error-codes.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: Auf dieser Seite werden die Fehlercodes für den Upgrade-Betrieb von ONTAP-Tools für das VMware vSphere-System erläutert. 
+---
+= Upgrade-Fehlercodes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Während der Aktualisierung von ONTAP Tools für VMware vSphere können Sie auf Fehlercodes stoßen. Die Fehlercodes sind fünf Ziffern lang, wobei die ersten beiden Ziffern das Skript darstellen, das auf das Problem gestoßen ist, und die letzten drei Ziffern den spezifischen Workflow innerhalb dieses Skripts darstellen.
+
+Alle Fehlerprotokolle werden in der Datei ansible-perl-errors.log aufgezeichnet, um die Nachverfolgung und Behebung von Problemen zu erleichtern. Diese Protokolldatei enthält den Fehlercode und die fehlgeschlagene Ansible-Aufgabe.
+
+
+NOTE: Die auf dieser Seite angegebenen Fehlercodes dienen nur als Referenz. Wenden Sie sich an das Support-Team, wenn der Fehler weiterhin besteht oder wenn keine Lösung erwähnt wird.
+
+In der folgenden Tabelle sind die Fehlercodes und die entsprechenden Dateinamen aufgeführt.
+
+|===
+
+
+| *Fehlercode* | *Skriptname* 
+
+
+| 00 | firstboot-network-config.pl, Mode Deployment 
+
+
+| 01 | firstboot-network-config.pl, Modusaktualisierung 
+
+
+| 02 | firstboot-inputs-validation.pl 
+
+
+| 03 | firstboot-deploy-otv-ng.pl, Deploy, ha 
+
+
+| 04 | firstboot-deploy-otv-ng.pl, Deploy, non-ha 
+
+
+| 05 | firstboot-deploy-otv-ng.pl, Neustart 
+
+
+| 06 | firstboot-deploy-otv-ng.pl, Upgrade, ha 
+
+
+| 07 | firstboot-deploy-otv-ng.pl, Upgrade, nicht-ha 
+
+
+| 08 | firstboot-otv-recovery.pl 
+|===
+Die letzten drei Ziffern des Fehlercodes zeigen den spezifischen Workflow-Fehler im Skript an:
+
+|===
+
+
+| *Upgrade-Fehlercode* | *Arbeitsablauf* | * Auflösung* 
+
+
+| 063 | Kopieren des Inhalts auf das Wiederherstellungsvolume ist fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 068 | Das Rollback von Debian-Paketen ist fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 069 | Wiederherstellung der Dateien fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 070 | Backup konnte nicht gelöscht werden | Snapshot-basierte Recovery 
+
+
+| 071 | Das Kubernetes-Cluster war in keinem ordnungsgemäßen Zustand | Snapshot-basierte Recovery 
+
+
+| 072 | Die CR-Datei ist nicht auf der Jail-Disk vorhanden | Snapshot-basierte Recovery 
+
+
+| 073 | Beim Anwenden des CR ist ein Fehler aufgetreten, während das Flag für die Abstimmung erzwingen auf FALSE gesetzt wurde | Snapshot-basierte Recovery 
+
+
+| 074 | Mount-ISO ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 075 | Die Vorabprüfungen für die Aktualisierung sind fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 076 | Aktualisierung der Registrierung fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 077 | Fehler beim Zurücksetzen der Registrierung | Snapshot-basierte Recovery 
+
+
+| 078 | Upgrade des Bedieners fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 079 | Rollback des Benutzers fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 080 | Aktualisierung der Dienste ist fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 081 | Rollback der Dienste ist fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 082 | Löschen alter Bilder aus Container fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 083 | Löschen des Backups ist fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 084 | JobManager konnte nicht wieder in die Produktion geändert werden | Snapshot-basierte Recovery 
+
+
+| 085 | Erstellen von CA-Zertifikatgeheimnissen fehlgeschlagen | Snapshot-basierte Recovery 
+
+
+| 086 | Fehler beim Erstellen von Zertifikatsgeheimnissen für Server/privaten Schlüssel | Snapshot-basierte Recovery 
+
+
+| 087 | Fehler! Führen Sie die Schritte für die Aktualisierung nach 10.0 bis 10.1 durch | Schritte nach dem Upgrade fehlgeschlagen. 
+
+
+| 088 | Die Konfiguration der Protokollrotation für journald ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 089 | Ändern der Eigentumsrechte für die Konfigurationsdatei „Zusammenfassung Protokoll drehen“ ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 091 | ISCSI-Upgrade ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 092 | ISCSI-Rollback ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 093 | Trident-Upgrade ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 094 | Trident-Rollback ist fehlgeschlagen | Wiederholen Sie die Aktualisierung. 
+
+
+| 095 | Debian-Upgrade fehlgeschlagen | Keine Wiederherstellung für debian-Upgrade. Upgrades der Services und Ausführung neuer Pods erfolgen 
+|===
+Weitere Informationen zu https://kb.netapp.com/data-mgmt/OTV/VSC_Kbs/How_to_restore_ONTAP_tools_for_VMware_vSphere_if_upgrade_fails_from_version_10.0_to_10.1["So stellen Sie ONTAP-Tools für VMware vSphere wieder her, wenn das Upgrade von Version 10.0 auf 10.1 fehlschlägt"]

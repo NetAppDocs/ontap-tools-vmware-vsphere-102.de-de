@@ -1,0 +1,159 @@
+---
+permalink: deploy/ontap-tools-deployment.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie können in kleinen oder mittleren Konfigurationen einen Single Node ohne HA konfigurieren. 
+---
+= Implementieren Sie ONTAP-Tools für VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können ONTAP Tools für VMware vSphere in zwei Konfigurationen implementieren:
+
+* Non-HA-Single-Node-Konfiguration
+* HA-Konfiguration
+
+
+[role="tabbed-block"]
+====
+.Non-HA-Single-Node-Konfiguration
+--
+Sie können eine Single Node-Konfiguration ohne HA in einer kleinen oder mittelgroßen Konfiguration implementieren.
+
+* Die kleine Konfiguration ohne HA umfasst 8 CPUs und 16 GB RAM.
+* Mittelgroße Konfiguration ohne HA enthält 12 CPUs und 24 GB RAM.
+
+
+*Bevor Sie beginnen*
+
+Stellen Sie sicher, dass die Netzwerkroute vorhanden ist. Auf das Storage-Datennetzwerk muss über das VM-Managementnetzwerk zugegriffen werden können. Melden Sie sich beispielsweise bei ONTAP an > führen Sie den Befehl _Network Route create -vserver <SVM> -Destination 0.0.0.0/0 -Gateway <gateway_ip>_ aus
+
+*Schritte*
+
+. Laden Sie die `.zip` Datei mit Binärdateien (_.ova_) und signierten Zertifikaten für ONTAP-Tools für VMware vSphere von der herunter https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["NetApp Support-Website"^].
+. Melden Sie sich beim vSphere-Server an.
+. Navigieren Sie zum Ressourcenpool, den Sie erstellt haben, oder zum Cluster oder zum Host, auf dem Sie die OVA bereitstellen möchten.
+. Klicken Sie mit der rechten Maustaste auf den gewünschten Speicherort und wählen Sie *OVF-Vorlage bereitstellen...*.
++
+
+NOTE: Implementieren Sie keine ONTAP-Tools für die virtuelle VMware vSphere-Maschine auf einem von ihr gemanagten VVols-Datastore.
+
+. Wählen Sie die OVA-Datei entweder über die URL für die _.ova_-Datei aus, oder navigieren Sie zu dem Ordner, in dem die _.ova_-Datei gespeichert ist, und klicken Sie dann auf *Weiter*.
+. Wählen Sie eine Computerressource aus und klicken Sie auf *Weiter*.
+. Überprüfen Sie die Details der Vorlage und klicken Sie auf *Weiter*.
+. Lesen und akzeptieren Sie die Lizenzvereinbarung.
+. Wählen Sie die Bereitstellungskonfiguration aus und klicken Sie auf *Weiter*.
++
+Bei den erweiterten Implementierungsoptionen kommt Trident zur dynamischen Storage-bereitstellung für ONTAP zum Erstellen von Volumes zum Einsatz. Bei der einfachen Implementierung werden lokale Storage-Ressourcen zur Erstellung von Volumes verwendet.
+
+. Wählen Sie den Speicher für die Konfiguration und die Festplattendateien aus und klicken Sie auf *Weiter*.
+. Wählen Sie das Zielnetzwerk für jedes Quellnetzwerk aus und klicken Sie auf *Weiter*.
+. Geben Sie in der *Customize Vorlage* die erforderlichen Details ein und klicken Sie auf *Weiter*
++
+** Wenn der SVM-Bereich aktiviert ist, sollte die SVM-Unterstützung mit der Management-IP-Adresse bereits aktiviert sein.
+** Die hier bereitgestellten Informationen werden während des Installationsprozesses auf korrekte Muster überprüft. Im Falle einer Abweichung wird eine Fehlermeldung auf der Webkonsole angezeigt, und Sie werden aufgefordert, falsche Informationen zu korrigieren.
+** Host-Namen müssen aus Groß-/Kleinbuchstaben (A–Z), Ziffern (0–9) oder dem Bindestrich (-) bestehen. Wenn Sie Dual-Stack konfigurieren möchten, geben Sie den Hostnamen an, der der IPv6-Adresse zugeordnet ist.
++
+
+NOTE: Pure IPV6 wird nicht unterstützt. Der gemischte Modus wird unterstützt, wenn VLAN sowohl IPv6- als auch IPv4-Adressen enthält.
+
+
+
+. Überprüfen Sie die Details im Fenster *Ready to Complete*, wählen Sie *Finish*.
++
+Wenn die Bereitstellungsaufgabe erstellt wird, wird der Fortschritt in der vSphere-Taskleiste angezeigt.
+
+. Schalten Sie die VM nach Abschluss der Aufgabe ein.
+
+
+--
+.HA-Konfiguration
+--
+Sie können HA für drei Nodes in kleinen, mittleren oder großen Konfigurationen konfigurieren. Für die HA-Implementierung werden die Servicedaten mithilfe von Trident gespeichert.
+
+* Kleine HA, drei Nodes, enthalten 8 CPUs und 16 GB RAM pro Node.
+* Mittlere HA, drei Nodes enthalten 12 CPUs und 24 GB RAM pro Node.
+* Große HA, drei Nodes enthalten 16 CPUs und 32 GB RAM pro Node.
+
+
+*Bevor Sie beginnen*
+
+Diese Aufgabe enthält Anweisungen zum Installieren von HA Three Nodes in kleinen, mittleren oder hohen Konfigurationen.
+
+Das Erstellen der Content Library ist ein obligatorischer erforderlicher Schritt für die Bereitstellung der HA-Konfiguration mit drei Nodes. Eine Content-Bibliothek in VMware ist ein Container-Objekt, das VM-Vorlagen, vApp-Vorlagen und andere Dateitypen speichert. Die Bereitstellung mit Inhaltsbibliothek bietet Ihnen eine nahtlose Erfahrung, da sie nicht von der Netzwerkkonnektivität abhängt.
+
+
+NOTE: Sie sollten die Inhaltsbibliothek auf einem freigegebenen Datastore speichern, sodass alle Hosts in einem Cluster darauf zugreifen können. Sie müssen eine Inhaltsbibliothek erstellen, um die OVA zu speichern, bevor Sie die OVA in der HA-Konfiguration bereitstellen.
+
+
+NOTE: Nach dem Hochladen sollte die Vorlage der Inhaltsbibliothek nach der Bereitstellung nicht gelöscht werden, da sie bei einem Neustart verwendet wird.
+
+Erstellen Sie die Inhaltsbibliothek mithilfe der folgenden Schritte:
+
+. Laden Sie die `.zip` Datei mit Binärdateien (_.ova_) und signierten Zertifikaten für ONTAP-Tools für VMware vSphere von der herunter https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["NetApp Support-Website"^].
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Wählen Sie die horizontalen Ellipsen neben vSphere Client aus und wählen Sie *Content Library*.
+. Wählen Sie auf der rechten Seite die Option *Erstellen*.
+. Geben Sie einen Namen für die Bibliothek ein, und erstellen Sie die Inhaltsbibliothek.
+. Navigieren Sie zu der von Ihnen erstellten Inhaltsbibliothek.
+. Wählen Sie *actions* rechts auf der Seite aus und wählen Sie *Import item* und importieren Sie die OVA-Datei.
+
+
+
+NOTE: Weitere Informationen finden Sie im https://blogs.vmware.com/vsphere/2020/01/creating-and-using-content-library.html["Erstellen und Verwenden der Inhaltsbibliothek"] Blog.
+
+Stellen Sie sicher, dass Sie Ihre OVA in Ihre Inhaltsbibliothek importiert haben. Halten Sie den Namen der Inhaltsbibliothek und den Namen des Bibliothekselements, den Sie für Ihr OVA-Element angegeben haben, griffbereit.
+
+
+NOTE: Bevor Sie mit der Bereitstellung fortfahren, setzen Sie den Distributed Resource Scheduler (DRS) des Clusters im Inventar während der Installation von ONTAP-Tools auf „konservativ“. Dadurch wird sichergestellt, dass VMs während der Installation nicht migriert werden.
+
+*Schritte*
+
+. Laden Sie die `.zip` Datei mit Binärdateien (_.ova_) und signierten Zertifikaten für ONTAP-Tools für VMware vSphere von der herunter https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["NetApp Support-Website"^].
+. Melden Sie sich beim vSphere-Server an.
+. Navigieren Sie zum Ressourcenpool, den Sie erstellt haben, oder zum Cluster oder zum Host, auf dem Sie die OVA bereitstellen möchten.
+. Klicken Sie mit der rechten Maustaste auf den gewünschten Speicherort und wählen Sie *OVF-Vorlage bereitstellen...*.
++
+
+NOTE: Implementieren Sie keine ONTAP-Tools für die virtuelle VMware vSphere-Maschine auf einem von ihr gemanagten VVols-Datastore.
+
+. Wählen Sie die OVA-Datei entweder über die URL für die _.ova_-Datei aus, oder navigieren Sie zu dem Ordner, in dem die _.ova_-Datei gespeichert ist, und klicken Sie dann auf *Weiter*.
+. So implementieren Sie ONTAP-Tools für VMware vSphere aus der Content Library:
++
+.. Öffnen Sie Ihre Inhaltsbibliothek, und klicken Sie auf das Bibliothekselement, das Sie bereitstellen möchten.
+.. Klicken Sie auf *actions* > *New VM aus dieser Vorlage*
+
+
+. Wählen Sie eine Computerressource aus und klicken Sie auf *Weiter*.
+. Überprüfen Sie die Details der Vorlage und klicken Sie auf *Weiter*.
+. Lesen und akzeptieren Sie die Lizenzvereinbarung und klicken Sie auf *Weiter*.
+. Wählen Sie die Bereitstellungskonfiguration aus und klicken Sie auf *Weiter*.
+. Wählen Sie den Speicher für die Konfiguration und die Festplattendateien aus und klicken Sie auf *Weiter*.
+. Wählen Sie das Zielnetzwerk für jedes Quellnetzwerk aus und klicken Sie auf *Weiter*.
+. Füllen Sie im Fenster *Vorlage anpassen* die erforderlichen Felder aus und klicken Sie auf *Weiter*.
++
+** Benennen Sie im HA-Modus der Bereitstellung die VM-Namen nicht nach der Bereitstellung um.
+** Wenn der SVM-Bereich aktiviert ist, sollte die SVM-Unterstützung mit der Management-IP-Adresse bereits aktiviert sein.
+** Die hier bereitgestellten Informationen werden während des Installationsprozesses auf korrekte Muster überprüft. Im Falle einer Abweichung wird eine Fehlermeldung auf der Webkonsole angezeigt, und Sie werden aufgefordert, falsche Informationen zu korrigieren.
+** Host-Namen müssen aus Groß-/Kleinbuchstaben (A–Z), Ziffern (0–9) oder dem Bindestrich (-) bestehen. Wenn Sie Dual-Stack konfigurieren möchten, geben Sie den Hostnamen an, der der IPv6-Adresse zugeordnet ist.
++
+
+NOTE: Pure IPV6 wird nicht unterstützt. Der gemischte Modus wird unterstützt, wenn VLAN sowohl IPv6- als auch IPv4-Adressen enthält.
+
+
+
+. Überprüfen Sie die Details im Fenster *Ready to Complete*, wählen Sie *Finish*.
++
+Wenn die Bereitstellungsaufgabe erstellt wird, wird der Fortschritt in der vSphere-Taskleiste angezeigt.
+
+. Schalten Sie die VM nach Abschluss der Aufgabe ein.
+
+
+--
+====
+Sie können den Fortschritt der Installation in der Webkonsole der VM verfolgen.
+
+Bei Unstimmigkeiten in den im OVF-Formular eingegebenen Werten werden Sie in einem Dialogfeld aufgefordert, Korrekturmaßnahmen einzuleiten. Nehmen Sie die erforderlichen Änderungen im Dialogfeld vor. Verwenden Sie dazu die Tabulatortaste, um zu navigieren, und wählen Sie „OK“. Sie haben drei Versuche, Probleme zu beheben. Wenn nach drei Versuchen weiterhin Probleme auftreten, wird der Installationsvorgang beendet, und es wird empfohlen, die Installation auf einer neuen VM erneut zu versuchen.

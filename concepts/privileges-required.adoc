@@ -1,0 +1,24 @@
+---
+permalink: concepts/privileges-required.html 
+sidebar: sidebar 
+keywords:  
+summary: Für verschiedene ONTAP-Tools für VMware vSphere-Tasks sind unterschiedliche Kombinationen von Berechtigungen für ONTAP-Tools für VMware vSphere sowie native vCenter Server-Berechtigungen erforderlich. 
+---
+= Berechtigungen für ONTAP-Tools für VMware vSphere-Tasks erforderlich
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für verschiedene ONTAP-Tools für VMware vSphere-Tasks sind unterschiedliche Kombinationen von Berechtigungen für ONTAP-Tools für VMware vSphere sowie native vCenter Server-Berechtigungen erforderlich.
+
+Um auf die ONTAP Tools für die GUI von VMware vSphere zuzugreifen, sollten Sie über die für ONTAP Tools spezifische Berechtigung zur Ansicht auf der korrekten vSphere Objektebene verfügen. Wenn Sie sich ohne diese Berechtigung anmelden, zeigt ONTAP Tools für VMware vSphere eine Fehlermeldung an, wenn Sie auf das NetApp-Symbol klicken und verhindert, dass Sie auf ONTAP-Tools zugreifen können.
+
+Mit der Berechtigung *Ansicht* können Sie auf ONTAP-Tools für VMware vSphere zugreifen. Mit dieser Berechtigung können Sie keine Aufgaben in ONTAP Tools für VMware vSphere ausführen. Um alle ONTAP-Tools für VMware vSphere Aufgaben auszuführen, sollten Sie über die entsprechenden spezifischen und nativen Berechtigungen für ONTAP-Tools für diese Aufgaben verfügen.
+
+Die Zuweisungsebene legt fest, welche Teile der Benutzeroberfläche angezeigt werden können. Wenn Sie dem Stammobjekt (Ordner) die Berechtigung Ansicht zuweisen, können Sie ONTAP-Tools für VMware vSphere aufrufen, indem Sie auf das Symbol NetApp klicken.
+
+Sie können die View Berechtigung einer anderen vSphere Objektebene zuweisen. Dadurch sind jedoch die ONTAP Tools für die VMware vSphere Menüs beschränkt, die Sie sehen und verwenden können.
+
+Das Root-Objekt ist der empfohlene Ort, um alle Berechtigungen zuzuweisen, die die View-Berechtigung enthalten.

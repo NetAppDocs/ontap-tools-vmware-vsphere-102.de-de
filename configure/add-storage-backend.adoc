@@ -1,0 +1,59 @@
+---
+permalink: configure/add-storage-backend.html 
+sidebar: sidebar 
+keywords:  
+summary: Storage-Back-Ends sind Systeme, die die ESXi Hosts zum Speichern von Daten verwenden. 
+---
+= Fügen Sie ein Storage-Back-End hinzu
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Storage-Back-Ends sind Systeme, die die ESXi Hosts zum Speichern von Daten verwenden. Sie können ein Storage-Backend entweder mit dem ONTAP Tools Manager oder der vSphere Client UI hinzufügen.
+
+*Über diese Aufgabe*
+
+Diese Aufgabe unterstützt Sie beim Onboarding eines ONTAP-Clusters. Wenn Sie mit dem ONTAP Tools Manager ein Storage Back-End hinzufügen, wird das Storage Back-End dem globalen Cluster hinzugefügt. Ordnen Sie das globale Cluster einer vCenter Server-Instanz zu, um einen SVM-Benutzer für die Bereitstellung von VVols-Datastores zu aktivieren.
+
+[role="tabbed-block"]
+====
+.Verwenden des ONTAP Tools Managers
+--
+
+NOTE: Ein Storage-Back-End ist global verfügbar, wenn sie über den ONTAP Tools Manager oder die ONTAP Tools APIs hinzugefügt wird. Ein Storage-Back-End ist lokal, wenn es über die vCenter Server-APIs hinzugefügt wird. So können Sie beispielsweise in einer mandantenfähigen Einrichtung ein globales Storage-Back-End (Cluster) und eine lokale SVM hinzufügen, um die SVM-Benutzeranmeldeinformationen zu verwenden.
+
+*Schritte*
+
+. Starten Sie den ONTAP Tools Manager über einen Webbrowser: `\https://loadBalanceIP:8443/virtualization/ui/`
+. Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
+. Wählen Sie in der Seitenleiste *Speicher-Backends* aus.
+. Wählen Sie *Hinzufügen*.
+. Geben Sie die IP-Adresse des Servers oder den FQDN, den Benutzernamen und das Kennwort ein, und wählen Sie *Hinzufügen*.
++
+
+NOTE: IPV4- und IPV6-Management-LIFs werden unterstützt. Auch die benutzerbasierten SVM-Anmeldedaten mit Management-LIFs werden unterstützt.
+
+
+
+--
+.Verwenden der vSphere-Client-UI
+--
+
+NOTE: Wenn Sie mithilfe der vSphere Client-UI ein Storage-Back-End hinzufügen, unterstützt VVols Datastore das direkte Hinzufügen eines SVM-Benutzers nicht.
+
+. Melden Sie sich mit beim vSphere-Client an `\https://vcenterip/ui`
+. Klicken Sie auf der Shortcuts-Seite unter dem Plug-ins-Bereich auf *NetApp ONTAP Tools*.
+. Navigieren Sie im linken Bereich der ONTAP-Tools zu *Speicher-Backends* und wählen Sie *Hinzufügen*.
+. Geben Sie im Fenster *Add Storage Backend* die IP-Adresse, den Benutzernamen, das Passwort und die Port-Details des Servers an und klicken Sie auf *Add*.
++
+
+NOTE: Sie können Cluster-basierte Anmeldedaten und IPV4- und IPV6-Management-LIFs hinzufügen oder SVM-basierte Anmeldedaten mit der Management-LIF der SVM bereitstellen, um einen SVM-Benutzer direkt hinzuzufügen.
+
+
+
+Die Liste wird aktualisiert, und das neu hinzugefügte Storage-Back-End wird in der Liste angezeigt.
+
+--
+====

@@ -1,0 +1,41 @@
+---
+permalink: concepts/ontap-roles.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie können mehrere empfohlene ONTAP Rollen für die Arbeit mit ONTAP Tools für VMware vSphere und rollenbasierter Zugriffssteuerung \(RBAC\) einrichten. Diese Rollen verfügen über die ONTAP-Berechtigungen, die zur Durchführung der erforderlichen Speichervorgänge erforderlich sind, die von ONTAP-Tools für VMware vSphere-Aufgaben ausgeführt werden.' 
+---
+= Empfohlene ONTAP-Rollen für ONTAP Tools für VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können mehrere empfohlene ONTAP-Rollen für die Arbeit mit ONTAP Tools für VMware vSphere und rollenbasierte Zugriffssteuerung einrichten. Diese Rollen enthalten die ONTAP-Berechtigungen, die zur Durchführung der Speichervorgänge erforderlich sind, die von ONTAP-Tools für VMware vSphere-Aufgaben ausgeführt werden.
+
+Um neue Benutzerrollen zu erstellen, müssen Sie sich als Administrator der Speichersysteme, auf denen ONTAP ausgeführt wird, einloggen. Sie können ONTAP Rollen mit ONTAP System Manager 9.8P1 oder höher erstellen.
+
+Jeder ONTAP-Rolle ist ein Benutzername- und Passwort-Paar zugeordnet, das die Anmeldeinformationen der Rolle darstellt. Wenn Sie sich nicht mit diesen Anmeldedaten anmelden, können Sie nicht auf die Speichervorgänge zugreifen, die der Rolle zugeordnet sind.
+
+Als Sicherheitsmaßnahme werden die ONTAP-Tools für VMware vSphere-spezifische ONTAP-Rollen hierarchisch geordnet. Dies bedeutet, dass die erste Rolle die restriktivste ist und nur über die Berechtigungen verfügt, die mit dem grundlegendsten Satz von ONTAP Tools für VMware vSphere Storage-Vorgänge verknüpft sind. Die nächste Rolle umfasst ihre eigenen Berechtigungen und alle Berechtigungen, die mit der vorherigen Rolle verknüpft sind. Jede weitere Rolle ist hinsichtlich der unterstützten Speichervorgänge weniger restriktiv.
+
+Im Folgenden finden Sie einige der empfohlenen ONTAP RBAC-Rollen beim Einsatz von ONTAP Tools für VMware vSphere. Nachdem Sie diese Rollen erstellt haben, können Sie sie Benutzern zuweisen, die Aufgaben im Zusammenhang mit Speicher ausführen müssen, z. B. beim Bereitstellen von virtuellen Maschinen.
+
+|===
+
+
+| * Rolle* | *Privilegien* 
+
+
+| Ermitteln | Diese Rolle ermöglicht es Ihnen, Storage-Systeme hinzuzufügen. 
+
+
+| Speicher Erstellen | Mit dieser Rolle können Sie Speicher erstellen. Diese Rolle umfasst auch alle Berechtigungen, die mit der Ermittlungs-Rolle verknüpft sind. 
+
+
+| Speicher Ändern | Mit dieser Rolle können Sie Speicher ändern. Diese Rolle umfasst auch alle Berechtigungen, die der Rolle Ermittlung und der Rolle Speicher erstellen zugeordnet sind. 
+
+
+| Speicher Zerstören | Mit dieser Rolle können Sie Speicher zerstören. Diese Rolle umfasst auch alle Berechtigungen, die der Rolle Ermittlung, der Rolle Speicher erstellen und der Rolle Speicher ändern zugeordnet sind. 
+|===
+Wenn Sie ONTAP-Tools für VMware vSphere verwenden, sollten Sie auch eine Policy-Based Management (PBM)-Rolle einrichten. Diese Rolle ermöglicht Ihnen das Storage-Management mithilfe von Storage-Richtlinien. Diese Rolle erfordert, dass Sie auch die Rolle "`Diskovery`" einrichten.

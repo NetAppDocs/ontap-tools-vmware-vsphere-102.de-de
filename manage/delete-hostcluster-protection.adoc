@@ -1,0 +1,25 @@
+---
+permalink: manage/delete-hostcluster-protection.html 
+sidebar: sidebar 
+keywords: vVols datastore,delete vVol 
+summary: Wenn Sie den Host-Cluster-Schutz entfernen, werden die Datastores ungeschützt. 
+---
+= Entfernen Sie den Host-Cluster-Schutz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+:firstname: [.lead]
+:author: [.lead]
+:authorinitials: [
+:authors: [.lead]
+
+
+Wenn Sie den Host-Cluster-Schutz entfernen, werden die Datastores ungeschützt.
+
+.Schritte
+. Um die geschützten Host-Cluster anzuzeigen, navigieren Sie zu *NetApp ONTAP Tools* > *Schutz* > *Host-Cluster-Beziehungen*.
++
+Auf dieser Seite können Sie die geschützten Host-Cluster zusammen mit ihrem Schutzstatus, der SnapMirror-Beziehung und ihrem entsprechenden SnapMirror-Status überwachen.
+
+. Klicken Sie im Fenster *Host Cluster Protection* auf das Kebab-Menü für den Cluster und wählen Sie dann *Schutz entfernen*.
+

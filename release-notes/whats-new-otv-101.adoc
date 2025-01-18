@@ -1,0 +1,50 @@
+---
+permalink: release-notes/whats-new-otv-102.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, otv, 10.2, ONTAP tools for VMware vSphere' 
+summary: Erfahren Sie mehr über die neuen Funktionen in den ONTAP Tools für VMware vSphere 10.2. 
+---
+= Neuerungen bei ONTAP Tools für VMware vSphere 10.2
+:allow-uri-read: 
+
+
+[role="lead"]
+Erfahren Sie mehr über die neuen Funktionen in den ONTAP Tools für VMware vSphere 10.2.
+
+[cols="30%,70%"]
+|===
+| Aktualisieren | Beschreibung 
+
+
+ a| 
+xref:../manage/storage-view-datastore.html#ontap-storage-views-for-nfs-datastores[Unterstützte NVMe-Protokolle]
+ a| 
+Die ONTAP Tools für VMware vSphere 10.2 unterstützen sowohl NVMe/FC- als auch NVMe/TCP-Protokolle für die Bereitstellung von VMFS-Datastores. Die nahtlos integrierten Workflows innerhalb der vCenter Schnittstelle vereinfachen die Bereitstellung von Datastores. Die Vorteile der Verwendung von NVMe/FC- und NVMe/TCP-Protokollen für die Bereitstellung von VMFS-Datastores sind eine optimierte Performance, enorme Skalierbarkeit und effiziente Verarbeitung mehrerer Datenanforderungen, deutliche Reduzierung der Latenz und effizientes Ressourcenmanagement. Die CPU-Auslastung bei NVMe-basiertem Storage I/O liegt im Vergleich zu älteren Datenprotokollen um bis zu 50 % niedriger.
+
+
+
+ a| 
+xref:../configure/create-vvols-datastore.html[Unterstützung des Fibre Channel-Protokolls (FC]
+ a| 
+Die ONTAP Tools für VMware vSphere 10.2 unterstützen das FC-Protokoll für die Bereitstellung von VVols und VMFS-Datastores. Die Vorteile der Unterstützung des FC-Protokolls umfassen hohe Leistung, Zuverlässigkeit und Stabilität, Skalierbarkeit, verbesserte Sicherheit und effizientes Ressourcenmanagement.
+
+
+
+ a| 
+xref:../configure/protect-cluster.html[SnapMirror Active Sync]
+ a| 
+Die Unterstützung von SnapMirror Active Sync mit ONTAP Tools für VMware vSphere 10.2 beinhaltet eine völlig neue Protect-Cluster-Funktion, die einen End-to-End-Konfigurations-Workflow für die Erstellung eines vSphere Metro Storage in der vCenter UI bietet. Dadurch sind erweiterte Cluster-Konfigurationen möglich, bei denen Business-Services selbst bei einem vollständigen Standortausfall weiterhin ausgeführt werden und Applikationen mithilfe einer sekundären Kopie einen transparenten Failover unterstützen.
+
+[NOTE]
+====
+Der SnapMirror Assistent kann SnapMirror Async und Sync neben SnapMirror Active Sync konfigurieren.
+
+====
+
+
+ a| 
+xref:../protect/enable-storage-replication-adapter.html[Verbesserungen des Storage Replication Adapter (SRA)]
+ a| 
+SRA implementiert die spezifikationsbasierte Disaster-Recovery-Lösung (DR) des VMware Site Recovery Manager (SRM). SnapMirror Active Sync über die SRM-Integration unterstützt die Planungs- und Orchestrierungslösung für Disaster Recovery und bietet so ein transparentes Applikations-Failover.
+
+|===

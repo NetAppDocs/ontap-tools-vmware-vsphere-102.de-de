@@ -1,0 +1,163 @@
+---
+permalink: deploy/prerequisites.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: Bevor Sie ONTAP Tools für VMware vSphere implementieren, sollten Sie mit den Speicherplatzanforderungen für das Implementierungspaket und einigen grundlegenden Host-Systemanforderungen vertraut sein. 
+---
+= Voraussetzungen für ONTAP-Tools für die Bereitstellung von VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor Sie ONTAP Tools für VMware vSphere implementieren, sollten Sie mit den Speicherplatzanforderungen für das Implementierungspaket und einigen grundlegenden Host-Systemanforderungen vertraut sein.
+
+Sie können ONTAP-Tools für VMware vSphere mit der virtuellen VMware vCenter Server-Appliance (vCSA) verwenden. Sie sollten ONTAP-Tools für VMware vSphere auf einem unterstützten vSphere-Client mit ESXi-System implementieren.
+
+
+
+== Systemanforderungen
+
+* *Platzanforderungen für Installationspaket pro Knoten*
++
+** 10 GB bei Thin Provisioning-Installationen
+** 248 GB für Thick Provisioning-Installationen
+
+
+* *Größenanforderungen für das Host-System pro Knoten* Empfohlener Speicher je nach Größe der Bereitstellung und pro Knoten ist wie in der folgenden Tabelle dargestellt:
+
+
+|===
+
+
+| *Art der Bereitstellung* | * CPUs* | *Speicher (GB)* 
+
+
+| Klein (S) | 8 | 16 
+
+
+| Mittel (M) | 12 | 24 
+
+
+| Groß (L) | 16 | 32 
+|===
+Weitere Details finden Sie im Abschnitt _Konfigurationsbeschränkungen zum Implementieren von ONTAP-Tools für VMware vSphere_ unten.
+
+
+
+== Mindestanforderungen hinsichtlich Storage und Applikationen
+
+|===
+| Storage, Host und Applikationen | Mindestversionsanforderungen 
+
+
+| ONTAP | Neueste Patch-Version von ONTAP 9.12.1, 9.13.1, 9.14.1 und 9.15.1. 
+
+
+| ESXi-Hosts | ESXi 7.0.3 
+
+
+| VCenter Server | VCenter 7.0U3 
+
+
+| VASA-Provider | 3,0 
+
+
+| OVA-Anwendung | 10,2 
+|===
+Das Interoperabilitäts-Matrix-Tool (IMT) enthält aktuelle Informationen zu den unterstützten Versionen von ONTAP, vCenter Server, ESXi-Hosts und Plug-in-Applikationen.
+
+https://imt.netapp.com/matrix/imt.jsp?components=105475;&solution=1777&isHWU&src=IMT["Interoperabilitäts-Matrix-Tool"^]
+
+
+
+== Konfigurationsbeschränkungen für die Implementierung von ONTAP Tools für VMware vSphere
+
+Die folgende Tabelle bietet einen Leitfaden zur Konfiguration von ONTAP Tools für VMware vSphere.
+
+|===
+
+
+| * Bereitstellung* | *Typ* | *Anzahl der VVols* | *Anzahl der Hosts* | *Protokolltyp* 
+
+
+| Einfache Implementierung | Klein (S) | ~12.000 | 32 | NFS, iSCSI 
+
+
+| Einfache Implementierung | Mittel (M) | ~24.000 | 64 | NFS, iSCSI 
+
+
+| Hochverfügbarkeit | Klein (S) | ~24.000 | 64 | NFS, iSCSI 
+
+
+| Hochverfügbarkeit | Mittel (M) | ~50.000 | 128 | NFS, iSCSI 
+
+
+| Hochverfügbarkeit | Groß (L) | 100 ~ | 256 [ANMERKUNG] die Anzahl der Hosts in der Tabelle zeigt die Gesamtzahl der Hosts von mehreren vCenter. | NFS, iSCSI 
+|===
+Weitere Informationen zur Größenbestimmung des Host-Systems pro Node finden Sie unter link:../deploy/prerequisites.html["Voraussetzungen für die Bereitstellung von ONTAP-Tools für VMware vSphere"].
+
+
+
+== ONTAP Tools für VMware vSphere – Storage Replication Adapter (SRA)
+
+In der folgenden Tabelle sind die Zahlen aufgeführt, die pro VMware Live Site Recovery-Instanz mithilfe von ONTAP Tools für VMware vSphere unterstützt werden.
+
+|===
+| *VCenter-Bereitstellungsgröße* | *Klein* | *Mittel* 
+
+
+| Gesamtzahl der virtuellen Maschinen, die für den Schutz mithilfe einer Array-basierten Replikation konfiguriert wurden | 2000 | 5000 
+
+
+| Gesamtzahl der Array-basierten Replikationsschutzgruppen | 250 | 250 
+
+
+| Gesamtzahl der Schutzgruppen pro Wiederherstellungsplan | 50 | 50 
+
+
+| Anzahl replizierter Datastores | 255 | 255 
+
+
+| Anzahl der VMs | 4000 | 7000 
+|===
+In der folgenden Tabelle sind die Anzahl der VMware Live Site Recovery und die entsprechenden ONTAP Tools für die VMware vSphere Implementierungsgröße aufgeführt.
+
+|===
+
+
+| *Anzahl der VMware Live Site Recovery Instanzen* | *Größe der Bereitstellung von ONTAP-Tools* 
+
+
+| Bis Zu 4 | Klein 
+
+
+| 4 bis 8 | Mittel 
+
+
+| Mehr als 8 | Groß 
+|===
+Weitere Informationen finden Sie unter https://docs.vmware.com/en/VMware-Live-Recovery/services/vmware-live-site-recovery/GUID-3AD7D565-8A27-450C-8493-7B53F995BB14.html["Betriebsgrenzen der VMware Live Site Recovery"].
+
+
+
+== Prüfungen vor der Bereitstellung
+
+Stellen Sie sicher, dass die folgenden Elemente vorhanden sind, bevor Sie mit der Bereitstellung fortfahren:
+
+* VCenter Server-Umgebung ist eingerichtet und konfiguriert.
+* (Optional) für Automatisierungsbenutzer: Die von NetApp bereitgestellte JSON-Datei für Postman-Sammlungen wird gesammelt.
+* Die Anmeldeinformationen des übergeordneten vCenter-Servers zur Bereitstellung der OVA sind vorhanden.
++
+
+NOTE: Das Passwort für den übergeordneten vCenter Server darf diese Sonderzeichen (€, ', ") nicht enthalten.
+
+* Sie verfügen über die Anmeldeinformationen für Ihre vCenter Server-Instanz, mit der sich die ONTAP-Tools für VMware vSphere nach der Bereitstellung zur Registrierung verbinden.
+* Browser-Cache wird gelöscht.
+* Stellen Sie sicher, dass drei freie IP-Adressen für die Implementierung ohne HA verfügbar sind: Eine freie IP-Adresse für den Load Balancer und eine freie IP-Adresse für die Kubernetes-Kontrollebene und eine IP-Adresse für den Node. Für HA-Implementierung benötigen Sie zusammen mit diesen drei IP-Adressen zwei weitere IP-Adressen für den zweiten und dritten Node. Hostnamen sollten den freien IP-Adressen auf dem DNS zugeordnet werden, bevor sie sowohl für HA- als auch für nicht-HA-Bereitstellungen zugewiesen werden. Alle fünf IP-Adressen in der HA-Implementierung und die drei IP-Adressen ohne HA-Implementierung sollten sich in demselben VLAN befinden, das für die Implementierung ausgewählt wurde.
+
+
+* Stellen Sie sicher, dass der Domänenname, auf dem das Zertifikat ausgestellt wird, der virtuellen IP-Adresse in einer Multi-vCenter-Bereitstellung zugeordnet ist, in der benutzerdefinierte CA-Zertifikate erforderlich sind. _Nslookup_ Überprüfen Sie den Domänennamen, um zu prüfen, ob die Domäne auf die beabsichtigte IP-Adresse aufgelöst wird. Die Zertifikate sollten mit dem Domänennamen und der IP-Adresse der Load Balancer-IP-Adresse erstellt werden.
+* Bevor Sie die ONTAP-Tools für VMware vSphere 10.2 in einer nicht-HA-erweiterten und HA-Konfiguration installieren, lesen Sie den KB-Artikel: https://kb.netapp.com/on-prem/ontap/da/NAS/NAS-KBs/pre-requisites_for_installing_OTV_10.1_and_10.2_in_NonHA_Advanced_and_HA["Voraussetzungen für die nicht-HA Advanced- und HA-Konfiguration"]
+

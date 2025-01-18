@@ -1,0 +1,37 @@
+---
+permalink: configure/add-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: 'VCenter Server-Instanzen sind die zentralen Management-Plattformen zur Steuerung von Hosts, Virtual Machines (VM) und Storage-Back-Ends.' 
+---
+= Fügen Sie vCenter Server-Instanzen hinzu
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VCenter Server stellt die zentrale Managementplattform bereit, mit der Sie Hosts, Virtual Machines (VMs) und Storage-Back-Ends steuern können.
+
+*Über diese Aufgabe*
+
+Sie können mehrere vCenter Server-Instanzen mit einer Instanz von ONTAP-Tools für VMware vSphere hinzufügen und managen.
+
+*Schritte*
+
+. Starten Sie den ONTAP Tools Manager über einen Webbrowser: `\https://loadBalanceIP:8443/virtualization/ui/`
+. Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
+. Wählen Sie in der Seitenleiste *vCenters* aus.
+. Wählen Sie *Add* für die Instanzen des vCenter-Servers aus und geben Sie Ihre vCenter-IP-Adresse/den Hostnamen, den Benutzernamen, das Kennwort und die Portdetails an.
+
+
+Wenn Sie ONTAP Tools eine vCenter Server-Instanz hinzufügen, werden die folgenden Aktionen automatisch ausgeführt:
+
+* Das vCenter Client-Plug-in ist registriert
+* Benutzerdefinierte Berechtigungen für die Plug-ins und APIs werden an die vCenter Server Instanz übertragen
+* Zum Verwalten der Benutzer werden benutzerdefinierte Rollen erstellt.
+
+
+Wenn Sie eine vCenter Server-Instanz hinzufügen, werden ONTAP-Tools für VMware vSphere-Plug-in automatisch als Remote-Plug-in für vCenter Server registriert. Das Plug-in ist auf den vSphere-Benutzeroberflächen-Shortcuts sichtbar.
+
+Das Plug-in wird mit einem Schlüssel _com.netapp.otv_ für die vCenter Server Instanz registriert und ist im ExtensionManager der vCenter Server Instanz zu sehen.

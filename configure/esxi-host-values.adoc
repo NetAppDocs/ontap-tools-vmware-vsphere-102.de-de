@@ -1,0 +1,86 @@
+---
+permalink: configure/esxi-host-values.html 
+sidebar: sidebar 
+keywords:  
+summary: Mithilfe der ONTAP-Tools für VMware vSphere können Timeouts und andere Werte auf den ESXi-Hosts festgelegt werden, um beste Leistung und erfolgreiches Failover zu gewährleisten. Die Werte, die ONTAP Tools für VMware vSphere Set bieten, basieren auf internen NetApp-Tests. 
+---
+= Legen Sie ESXi-Hostwerte fest
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mithilfe der ONTAP-Tools für VMware vSphere können Timeouts und andere Werte auf den ESXi-Hosts festgelegt werden, um beste Leistung und erfolgreiches Failover zu gewährleisten. Die Werte, die ONTAP Tools für VMware vSphere Set bieten, basieren auf internen NetApp-Tests.
+
+Auf einem ESXi-Host können Sie die folgenden Werte festlegen:
+
+
+
+== HBA/CNA-Adaptereinstellungen
+
+Legt die empfohlenen Einstellungen für das HBA-Zeitlimit für NetApp-Speichersysteme fest.
+
+* *Disk.QFullSampleSize*
++
+Setzen Sie diesen Wert für alle Konfigurationen auf 32. Durch die Festlegung dieses Wertes werden I/O-Fehler verhindert.
+
+* *Disk.QFullThreshold*
++
+Setzen Sie diesen Wert für alle Konfigurationen auf 8. Durch die Festlegung dieses Wertes werden I/O-Fehler verhindert.
+
+* * Emulex FC HBA-Timeouts*
++
+Standardwert verwenden.
+
+* *QLogic FC HBA Timeouts*
++
+Standardwert verwenden.
+
+
+
+
+
+== MPIO-Einstellungen
+
+MPIO-Einstellungen definieren bevorzugte Pfade für NetApp-Speichersysteme. Die MPIO-Einstellungen legen fest, welche der verfügbaren Pfade optimiert sind (im Gegensatz zu nicht optimierten Pfaden, die das Verbindungskabel durchlaufen), und sie legen den bevorzugten Pfad zu einem dieser Pfade fest.
+
+In hochperformanten Umgebungen oder wenn Sie die Performance mit einem einzelnen LUN-Datastore testen, sollten Sie eventuell die Load-Balancing-Einstellung der Round-Robin (VMW_PSP_RR) Path Selection Policy (PSP) von der Standard-IOPS-Einstellung von 1000 auf den Wert 1 ändern.
+
+
+
+== NFS-Einstellungen
+
+* *Net.TcpipHeapSize*
++
+Setzen Sie diesen Wert auf 32.
+
+* *Net.TcpipHeapMax*
++
+Setzen Sie diesen Wert auf 1024 MB.
+
+* *NFS.MaxVolumes*
++
+Setzen Sie diesen Wert auf 256.
+
+* *NFS41.MaxVolumes*
++
+Setzen Sie diesen Wert auf 256.
+
+* *NFS.MaxQueueDepth*
++
+Setzen Sie diesen Wert auf 128 oder höher, um Engpässe in der Warteschlange zu vermeiden.
+
+* *NFS.HeartbeatMaxFailures*
++
+Setzen Sie diesen Wert für alle NFS-Konfigurationen auf 10.
+
+* *NFS.HeartbeatFrequency*
++
+Setzen Sie diesen Wert für alle NFS-Konfigurationen auf 12.
+
+* *NFS.HeartbeatTimeout*
++
+Setzen Sie diesen Wert für alle NFS-Konfigurationen auf 5.
+
+

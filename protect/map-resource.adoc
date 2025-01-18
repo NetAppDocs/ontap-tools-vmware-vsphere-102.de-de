@@ -1,0 +1,44 @@
+---
+permalink: protect/map-resource.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie sollten Ihre Ressourcen am geschützten Standort und am Recovery-Standort zuordnen, damit Virtual Machines für Failover auf eine oder mehrere Host-Gruppen konfiguriert sind. 
+---
+= Konfigurieren von Ressourcenzuordnungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten Ihre Ressourcen am geschützten Standort und am Recovery-Standort zuordnen, damit Virtual Machines für Failover auf eine oder mehrere Host-Gruppen konfiguriert sind.
+
+*Was Sie brauchen*
+
+Sie sollten die geschützten und Recovery-Standorte verbunden haben.
+
+
+NOTE: In VMware Live Site Recovery können Ressourcen Ressourcen-Pools, ESXi-Hosts oder vSphere-Cluster sein.
+
+*Schritte*
+
+. Melden Sie sich am vCenter Server an und klicken Sie auf *Site Recovery* > *Sites*.
+. Wählen Sie Ihre geschützte Site aus und klicken Sie auf *Verwalten*.
+. Wählen Sie auf der Registerkarte Verwalten die Option *Ressourcenzuordnungen* aus.
+. Klicken Sie auf *Neu*, um eine neue Ressourcenzuordnung zu erstellen.
++
+Der Assistent „Ressourcenzuordnung erstellen“ wird angezeigt.
+
+. Führen Sie im Assistenten „Ressourcenzuordnung erstellen“ folgende Schritte aus:
++
+.. Wählen Sie *Zuordnungen für Ressource mit übereinstimmenden Namen automatisch vorbereiten* aus und klicken Sie auf *Weiter*.
+.. Wählen Sie die gewünschten Rechenzentrumsobjekte für die geschützten und Recovery-Standorte aus und klicken Sie auf *Zuordnungen hinzufügen*.
+.. Klicken Sie auf *Weiter*, nachdem Zuordnungen erfolgreich erstellt wurden.
+.. Wählen Sie das zuvor verwendete Objekt aus, um eine umgekehrte Zuordnung zu erstellen, und klicken Sie dann auf *Fertig stellen*.
+
+
+
+
+*Ergebnis*
+
+Auf der Seite Ressourcenzuordnungen werden die geschützten Standortressourcen und die Ressourcen des Recovery-Standorts angezeigt. Sie können die gleichen Schritte für andere Netzwerke in Ihrer Umgebung befolgen.
