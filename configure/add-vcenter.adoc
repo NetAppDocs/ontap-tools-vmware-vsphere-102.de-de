@@ -11,7 +11,7 @@ summary: 'VCenter Server-Instanzen sind die zentralen Management-Plattformen zur
 
 
 [role="lead"]
-VCenter Server stellt die zentrale Managementplattform bereit, mit der Sie Hosts, Virtual Machines (VMs) und Storage-Back-Ends steuern können.
+Fügen Sie vCenter Server-Instanzen zu den ONTAP-Tools für VMware vSphere hinzu, um Ihre virtuellen Datastores in Ihrer vCenter Server-Umgebung zu konfigurieren, zu managen und zu sichern. Wenn Sie mehrere vCenter Server-Instanzen hinzufügen, sind für die sichere Kommunikation zwischen ONTAP-Tools und jedem vCenter Server benutzerdefinierte CA-Zertifikate erforderlich.
 
 *Über diese Aufgabe*
 
